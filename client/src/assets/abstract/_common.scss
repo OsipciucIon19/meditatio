@@ -1,0 +1,250 @@
+@import "_variables";
+@import "~bootstrap/scss/bootstrap";
+
+// Overriding bootstrap styles
+$theme-colors: (
+    "primary": $primary-color,
+    "secondary": $secondary-color,
+    "danger": $danger-color
+);
+
+.btn {
+    margin: 0.3rem;
+    font-family: $brand-font!important;
+    color: $dark-gray-brand-color!important;
+    border: 0!important;
+    border-radius: 25px!important;
+}
+
+.btn:hover {
+    color: $dark-gray-brand-color!important;
+    transition: 0.5s linear;
+}
+
+.btn-primary {
+    background-color: $primary-color!important;
+}
+
+.btn-primary:hover{
+    background-color: $primary-alt-hover!important;
+}
+
+.btn-secondary {
+    background-color: $secondary-color!important;
+}
+
+.btn-secondary:hover{
+    background-color: $secondary-alt-hover!important;
+}
+
+.btn-danger {
+    color: $white!important;
+    background-color: $danger-color!important;
+}
+
+.btn-danger:hover{
+    background-color: $danger-alt-hover!important;
+}
+
+// Selection
+::selection {
+    background-color: $primary-color;
+    color: $white;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $gray-brand-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $dark-gray-brand-color;
+    transition: 0.5s linear;
+}
+
+// Common styles
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+ul, li {
+    margin: 0;
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $brand-font;
+}
+
+section {
+    margin: 2rem auto;
+}
+
+input {
+    border-radius: 25px!important;
+    margin: 0.3rem 0.3rem 0.3rem 0!important;
+    text-overflow: ellipsis;
+}
+
+.blurry-bg {
+    background: rgba(255, 247, 234, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.blurry {
+    border-radius: 5px;
+    background: rgba(255, 247, 234, 0.6 );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s ease-in-out;
+}
+
+.hero-row {
+    .lazy-load-image-background {
+        display: flex!important;
+        justify-content: center;
+    }
+}
+
+.logo-title {
+    color: $dark-gray-brand-color;
+    font-family: $brand-font;
+    font-weight: 500;
+    font-size: 30pt;
+    text-decoration: none;
+    
+    &:hover {
+        color: $dark-gray-brand-color;
+    }
+}
+
+.navbar-brand {
+    display: flex;
+    padding: 0;
+}
+
+.nav-item {
+    margin-left: 0.3rem;
+    font-size: 14pt;
+    
+    .nav-link {
+        font-weight: 600;
+    }
+}
+
+.dropdown-header {
+    font-size: 12pt!important;
+}
+
+.dropdown-item {
+    font-size: 12pt;
+    
+    a {
+        text-decoration: none;
+    }
+    
+    &:active {
+        background-color: $primary-color!important;
+    }
+}
+
+footer {
+    .nav-item {
+        margin-top: 1.5rem;
+        color: $dark-gray-brand-color;
+    }
+}
+
+.copyright-footer {
+    color: $white;
+    background-color: $black;
+    
+    ul {
+        display: flex;
+        justify-content: flex-end;
+
+        li {
+            margin-left: 66px;
+        }
+
+        li:first-child {
+            margin-left: 0;
+        }
+    }
+}
+
+// Courses Page
+.courses-grid {
+    min-height: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(380px, 1fr));
+    grid-gap: 0.5rem;
+    
+    .course-item {
+        margin: 1rem auto;
+        border-radius: 5px;                    
+
+        .course-card {
+            position: relative;
+            overflow: hidden;
+
+            &__image {
+                border-radius: 5px;
+                width: 270px;
+                height: 380px;
+                background-size: contain;
+                transition: all 0.5s ease-in-out;
+            }
+            
+            &__content {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 270px;
+                height: 380px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                &__grade .grade-value, &__title {
+                    font-weight: bold;
+                }
+                
+                &__additional-info {
+                    display: flex;
+                    flex-direction: column;
+                    transform: translate(0, 270px);
+                    transition: all 0.5s ease-in-out;
+                    
+                    &__description {
+                        padding: 1rem;
+                        height: 115px;
+                        margin-top: 3rem;
+                        font-weight: bold;
+                    }
+                    
+                    &__button {
+                        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                    }
+                }
+
+                .active {
+                    transform: translate(0, 0);
+                }
+            }
+        }
+    }
+}
