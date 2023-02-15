@@ -7,7 +7,6 @@ const uuid = require('uuid')
 const mailService = require('./mail-service')
 const tokenService = require('./token-service')
 const UserDto = require('../dtos/user-dto')
-const Role = require('../models/Role')
 const ApiError = require('../exceptions/api-error')
 const constants = require('../constants')
 const { ObjectId } = require('mongodb')
@@ -19,7 +18,7 @@ class UserService {
             throw ApiError.BadRequest(`Utilizatorul cu posta ${email} deja exista`)
         }
         const hashPassword = await bcrypt.hash(password, 3)
-        const userRole = await Role.findOne({ value: constants.ROLE_STUDENT })
+        const userRole = constants.ROLE_STUDENT
         const activationLink = uuid.v4()
 
         const user = await UserModel.create({ email, password: hashPassword, roles: [userRole.value], activationLink })
@@ -79,7 +78,7 @@ class UserService {
             throw ApiError.BadRequest('Cererea a fost deja acceptata')
         }
         
-        const teacherRole = await Role.findOne({ value: constants.ROLE_TEACHER })
+        const teacherRole = constants.ROLE_TEACHER
         const activationLink = uuid.v4()
         const {firstName, lastName, email, password, subjects, phoneNumber} = request
         const user = await UserModel.create({ 

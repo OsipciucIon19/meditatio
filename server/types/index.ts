@@ -8,10 +8,6 @@ export interface Course extends Document {
     content: string
 }
 
-export interface Role extends Document {
-    value: string
-}
-
 export interface Subject extends Document {
     title: string,
     grade: number
@@ -22,7 +18,7 @@ export interface User extends Document {
     lastName: string,
     email: string,
     password: string,
-    roles: Array<Role>,
+    roles: Array<String>,
     isActivated: boolean,
     activationLink: string,
     subjects?: Array<Subject>,
