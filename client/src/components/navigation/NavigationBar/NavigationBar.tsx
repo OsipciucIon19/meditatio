@@ -79,15 +79,17 @@ const NavigationBar: FC = () => {
                                         Salut, <b>{store.user.firstName} {store.user.lastName}</b>!
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem>
-                                        <Link to="profile">
-                                            Cabinet Personal
-                                        </Link>
+                                    <DropdownItem
+                                        tag={Link}
+                                        to="profile"
+                                    >
+                                        Cabinet Personal
                                     </DropdownItem>
-                                    <DropdownItem to="calendar">
-                                        <Link to="calendar">
-                                            Calendar
-                                        </Link>
+                                    <DropdownItem
+                                        tag={Link}    
+                                        to="calendar"
+                                    >
+                                        Calendar
                                     </DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
