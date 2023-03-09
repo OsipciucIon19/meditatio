@@ -5,10 +5,12 @@ export interface Course extends Document {
     imagePath: string,
     price: number,
     status: string,
-    content: string
+    content: string,
+    subject: object
 }
 
 export interface Subject extends Document {
+    _id: string,
     title: string,
     grade: number
 }

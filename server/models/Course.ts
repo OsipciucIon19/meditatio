@@ -1,10 +1,10 @@
 import {Course} from '../types'
 
 const { Schema, model } = require('mongoose')
+const { ObjectId } = require('mongodb')
 
 const CourseSchema: Course = new Schema({
-    title: { type: String },
-    category: { type: String },
+    subject: { type: ObjectId, ref: 'Subject' },
     description: { type: String },
     imagePath: { type: String },
     price: { type: Number },

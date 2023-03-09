@@ -6,8 +6,8 @@ export default class CourseService {
     static fetchCourses(limit = 10, page = 1): Promise<AxiosResponse<Course[]>> {
         return $api.get<Course[]>('/courses', {
             params: {
-                _limit: limit,
-                _page: page
+                limit: limit,
+                page: page
             }
         })
     }
