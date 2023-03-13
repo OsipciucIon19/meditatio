@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {Route, Routes, useLocation} from "react-router-dom";
 import Home from "pages/Home/Home";
 import Courses from "pages/Courses/Courses";
@@ -9,9 +9,13 @@ import RegistrationForm from "components/authentication/RegistrationForm/Registr
 import NotFoundPage from "pages/NotFound/NotFoundPage";
 import CourseDetails from "pages/CourseDetails/CourseDetails";
 import UserCalendar from "../pages/user/UserCalendar";
+import Schedule from 'pages/Schedule/Schedule'
+import { observer } from 'mobx-react-lite'
+import { Context } from 'index'
 
 const Router = () => {
     const { pathname } = useLocation()
+    const { store } = useContext(Context)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -23,9 +27,18 @@ const Router = () => {
         {id: 'aboutUsPage', path: '/about-us', element: <AboutUs/>},
         {id: 'coursesPage', path: '/courses', element: <Courses/>},
         {id: 'courseDetailsPage', path: '/courses/:id', element: <CourseDetails/>},
+        {
+            id: 'schedulePage',
+            path: '/schedule',
+            element: <Schedule userId={store.user.id} userRoles={store.user.roles}/>
+        },
         {id: 'loginPage', path: '/login', element: <LoginForm/>},
         {id: 'registrationPage', path: '/registration', element: <RegistrationForm/>},
-        {id: 'userCalendarPage', path: '/calendar', element: <UserCalendar/>},
+        {
+            id: 'userCalendarPage',
+            path: '/calendar',
+            element: <UserCalendar userId={store.user.id} userRoles={store.user.roles}/>
+        },
         {id: 'notFoundPage', path: '*', element: <NotFoundPage/>}
     ]
 
@@ -39,4 +52,4 @@ const Router = () => {
     )
 }
 
-export default Router
+export default observer(Router)

@@ -11,7 +11,7 @@ const CourseList: FC<CoursesProps> = ({courses}) => {
         <div className="courses-grid">
             { courses.map((course: Course, index: number) =>
                 <div
-                    key={ course.title + index }
+                    key={ course._id + index }
                     className="course-item"
                 >
                     <CourseItem course={course}/>

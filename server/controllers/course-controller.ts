@@ -8,8 +8,8 @@ class CourseController {
 
     async getCourses(req: Request, res: Response, next: NextFunction) {
         try {
-            const parsedUrl = url.parse(req.url);
-            const { page, limit } = querystring.parse(parsedUrl.query);
+            const parsedUrl = url.parse(req.url)
+            const { page, limit } = querystring.parse(parsedUrl.query)
 
             const courses = await courseService.getAllCourses(parseInt(page), parseInt(limit))
 

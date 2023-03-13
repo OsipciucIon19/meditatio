@@ -6,7 +6,7 @@ export interface Course extends Document {
     price: number,
     status: string,
     content: string,
-    subject: object
+    subject: Subject
 }
 
 export interface Subject extends Document {
@@ -40,4 +40,13 @@ export interface TeacherRequest extends Document {
 export interface Token extends Document {
     user: string,
     refreshToken: string,
+}
+
+export interface Event extends Document {
+    student: string,
+    teacher: string,
+    course: string,
+    start: Date,
+    end: Date,
+    status?: string
 }

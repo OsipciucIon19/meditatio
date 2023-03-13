@@ -1,29 +1,19 @@
-import React, {FC, useEffect, useRef, useState} from 'react'
+import React, {FC, useEffect, useRef} from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import roLocale from '@fullcalendar/core/locales/ro'
 import {StyledCalendar} from './Calendar.styled'
+import {Event} from 'types/event'
 
-const Calendar: FC = (props) => {
+type CalendarProps = {
+    events: Array<Event>
+}
+
+const Calendar: FC<CalendarProps> = ({ events }) => {
     const calendarRef = useRef(null);
     const isMobileScreen = window.screen.width < 768
-
-    const events = [
-        {
-            id: '12',
-            title: 'Matematică cl 1',
-            start: new Date().toISOString().replace(/T.*$/, '') + 'T11:00:00',
-            end: new Date().toISOString().replace(/T.*$/, '') + 'T11:50:00'
-        },
-        {
-            id: '345',
-            title: 'Limba română cl 4',
-            start: new Date().toISOString().replace(/T.*$/, '') + 'T12:00:00',
-            end: new Date().toISOString().replace(/T.*$/, '') + 'T15:01:00'
-        }
-    ]
 
     useEffect(() => {
         window.onresize = () => {
@@ -60,7 +50,7 @@ const Calendar: FC = (props) => {
                 plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
                 initialView={isMobileScreen ? 'timeGridDay' : 'timeGridWeek'}
                 weekends={true}
-                initialEvents={events}
+                events={events}
                 eventContent={renderEventContent}
                 editable={true}
                 selectable

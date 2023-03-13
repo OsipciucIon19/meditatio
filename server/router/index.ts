@@ -2,6 +2,7 @@ const Router = require('express').Router
 const userController = require('../controllers/user-controller')
 const courseController = require('../controllers/course-controller')
 const subjectController = require('../controllers/subject-controller')
+const eventController = require('../controllers/event-controller')
 const router = new Router()
 const { body } = require('express-validator')
 const roleMiddleware = require('../middleware/role-middleware')
@@ -21,6 +22,10 @@ router.get('/users', roleMiddleware([constants.ROLE_ADMIN]), userController.getU
 router.get('/courses', courseController.getCourses)
 router.get('/courses/:id', courseController.getCourseById)
 // router.post('/add-course', courseController.addCourse)
+
+router.get('/get-user-events/:id', eventController.getUserEvents)
+router.post('/add-user-event', eventController.addUserEvent)
+router.post('/add-user-events', eventController.addUserEvents)
 
 router.get('/subjects', subjectController.getSubjects)
 

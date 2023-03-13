@@ -19,6 +19,9 @@ class CourseService {
                     foreignField: '_id',
                     as: 'subject'
                 }
+            },
+            {
+                $unwind: '$subject'
             }
         ])
             .skip((page - 1) * limit)
@@ -37,6 +40,8 @@ class CourseService {
                     foreignField: '_id',
                     as: 'subject'
                 }
+            }, {
+            $unwind: '$subject'
             }
         ]
 
@@ -53,7 +58,7 @@ class CourseService {
 
         const teachers = await UserModel.find({
             roles: 'TEACHER',
-            subjects: course.subject[0]._id
+            subjects: course.subject._id
         })
 
         return {...course, teachers}

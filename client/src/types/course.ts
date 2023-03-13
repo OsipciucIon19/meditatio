@@ -1,3 +1,6 @@
+import {Subject} from './subject'
+import {User} from './user'
+
 export interface Course {
     _id: string
     title: string
@@ -6,5 +9,7 @@ export interface Course {
     imagePath: string
     price: number
     status: string
-    content: string
+    content: string,
+    subject?: Subject
+    teachers: Array<User>
 }

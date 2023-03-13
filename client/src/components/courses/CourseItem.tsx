@@ -19,10 +19,10 @@ const CourseItem = (props: any) => {
             />
             <div className={`course-card__content ${areDetailsShown && 'blurry'}`}>
                 <h3 className="course-card__content__title mt-5">
-                    {props.course.title}
+                    {props.course.subject.title}
                 </h3>
                 <h4 className="course-card__content__grade">
-                    clasa <span className="grade-value">{props.course.grade}</span>
+                    clasa <span className="grade-value">{props.course.subject.grade}</span>
                 </h4>
                 <div
                     className={`course-card__content__additional-info ${areDetailsShown ? 'active' : 'inactive'}`}
