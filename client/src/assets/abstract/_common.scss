@@ -95,6 +95,14 @@ input {
     text-overflow: ellipsis;
 }
 
+.rw-widget-picker {
+    border-radius: 25px!important;
+
+    .rw-widget-input {
+        box-shadow: unset;
+    }
+}
+
 .blurry-bg {
     background: rgba(255, 247, 234, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

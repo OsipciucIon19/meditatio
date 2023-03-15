@@ -4,6 +4,7 @@ import {observer} from 'mobx-react-lite'
 import NavigationBar from './components/navigation/NavigationBar/NavigationBar'
 import Footer from "components/footer/Footer";
 import Router from "./routes";
+import 'react-widgets/styles.css'
 
 const App: FC = () => {
 

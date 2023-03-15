@@ -6,7 +6,10 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import roLocale from '@fullcalendar/core/locales/ro'
 import {StyledCalendar} from './Calendar.styled'
 import {Event} from 'types/event'
-import {Button, Form, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button, Form, Input, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
+import DatePicker from 'react-widgets/DatePicker'
+import Localization from 'react-widgets/Localization'
+import {DateLocalizer} from 'react-widgets/IntlLocalizer'
 
 type CalendarProps = {
     events: Array<Event>
@@ -15,6 +18,7 @@ type CalendarProps = {
 
 const Calendar: FC<CalendarProps> = ({ events, isEditable= false }) => {
     const calendarRef = useRef(null);
+    const [selectedEvent, setSelectedEvent] = useState(new Date())
     const isMobileScreen = window.screen.width < 768
     const [modal, setModal] = useState(false)
 
@@ -33,8 +37,8 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable= false }) => {
         }
     },[window.screen.width])
 
-    const handleDateClick = () => {
-        console.log('test')
+    const handleDateClick = (eventInfo) => {
+        setSelectedEvent(eventInfo.date)
         setModal(true)
     }
 
@@ -68,14 +72,35 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable= false }) => {
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Modal title</ModalHeader>
                 <ModalBody>
-                    <Form>
-                        <Input />
-                        <Input />
-                        <Input />
-                    </Form>
+                    <Localization date={new DateLocalizer({culture: 'ro', firstOfWeek: 1})}>
+                        <Form>
+                            <label htmlFor="title">Title:</label>
+                            <Input />
+                            <label>
+                                From:
+                            </label>
+                            <DatePicker
+                                value={selectedEvent}
+                                onChange={(value) => setSelectedEvent(value)}
+                                includeTime
+                            />
+                            <label>
+                                To:
+                            </label>
+                            <DatePicker
+                                value={new Date(selectedEvent.getTime() + 60 * 60 * 1000)}
+                                disabled
+                                includeTime
+                            />
+                        </Form>
+                    </Localization>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={toggle}>
+                    <Button color="primary" onClick={() => {
+                        toggle()
+                        console.log(selectedEvent)
+                    }
+                    }>
                         Do Something
                     </Button>{' '}
                     <Button color="secondary" onClick={toggle}>
