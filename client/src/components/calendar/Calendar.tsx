@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef} from 'react'
+import React, {FC, useEffect, useRef, useState} from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -6,14 +6,20 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import roLocale from '@fullcalendar/core/locales/ro'
 import {StyledCalendar} from './Calendar.styled'
 import {Event} from 'types/event'
+import {Button, Form, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 
 type CalendarProps = {
     events: Array<Event>
+    isEditable: boolean
 }
 
-const Calendar: FC<CalendarProps> = ({ events }) => {
+const Calendar: FC<CalendarProps> = ({ events, isEditable= false }) => {
     const calendarRef = useRef(null);
     const isMobileScreen = window.screen.width < 768
+    const [modal, setModal] = useState(false)
+
+    const toggle = () => setModal(!modal)
+
 
     useEffect(() => {
         window.onresize = () => {
@@ -26,7 +32,11 @@ const Calendar: FC<CalendarProps> = ({ events }) => {
             window.onresize = null
         }
     },[window.screen.width])
-    
+
+    const handleDateClick = () => {
+        console.log('test')
+        setModal(true)
+    }
 
     function renderEventContent(eventInfo) {
         return (
@@ -38,13 +48,9 @@ const Calendar: FC<CalendarProps> = ({ events }) => {
 
     return (
         <StyledCalendar>
+            <Button onClick={() => setModal(true)}>Add schedule</Button>
             <FullCalendar
                 ref={calendarRef}
-                // headerToolbar={{
-                //     left: "prev,today,next",
-                //     center: "title",
-                //     right: isMobileScreen ? 'timeGridWeek' : 'timeGridDay'
-                // }}
                 locale={roLocale}
                 nowIndicator={true}
                 plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
@@ -52,12 +58,31 @@ const Calendar: FC<CalendarProps> = ({ events }) => {
                 weekends={true}
                 events={events}
                 eventContent={renderEventContent}
-                editable={true}
+                editable={isEditable}
                 selectable
                 selectMirror={true}
                 dayMaxEvents={true}
                 allDaySlot={false}
+                dateClick={handleDateClick}
             />
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <Input />
+                        <Input />
+                        <Input />
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={toggle}>
+                        Do Something
+                    </Button>{' '}
+                    <Button color="secondary" onClick={toggle}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
         </StyledCalendar>
     );
 }

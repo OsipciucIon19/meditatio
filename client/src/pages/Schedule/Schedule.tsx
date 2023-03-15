@@ -3,6 +3,7 @@ import {useLocation} from 'react-router-dom'
 import {useFetching} from 'hooks/useFetching'
 import EventService from 'services/EventService'
 import Calendar from 'components/calendar/Calendar'
+import {deleteDuplicateEvents} from 'utils/events'
 
 type ScheduleProps = {
     userId: string,
@@ -19,15 +20,20 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
     const [fetchTeacherEvents,, teacherEventsError] = useFetching(async (id, roles): Promise<void> => {
         const response = await EventService.fetchEvents(id, roles)
         setTeacherEvents([...teacherEvents, ...response.data])
+        addEventColors(teacherEvents, 'red')
     })
 
 
+    const addEventColors = (events, color) => {
+        events.forEach(event => {
+            event.color = color
+        })
+    }
+
     useEffect(() => {
         const { teacher } = location.state
-        setTimeout(() =>
-            fetchStudentEvents(userId, userRoles) , 1000)
+        fetchStudentEvents(userId, userRoles)
         fetchTeacherEvents(teacher._id, teacher.roles)
-
     }, [])
 
     return (
@@ -35,10 +41,15 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
             <div>Teacher ID: {location.state.teacher._id}</div>
             <div>Student ID: {userId}</div>
             <div>Student events:</div>
-            <div>{!studentEventsError && studentEvents?.map((event, index) => <div key={event.id + index}>{event.title + event.grade}</div>) }</div>
+            <div>{!studentEventsError && studentEvents?.map((event, index) => <div key={event._id + index}>{event.title + event.grade}</div>) }</div>
             <div>Teacher events:</div>
-            <div>{!teacherEventsError && teacherEvents?.map((event, index) => <div key={event.id + index}>{event.title + event.grade}</div>) }</div>
-            <Calendar events={studentEvents} />
+            <div>{!teacherEventsError && teacherEvents?.map((event, index) => <div key={event._id + index}>{event.title + event.grade}</div>) }</div>
+            <div>Test:</div>
+            <div>{ deleteDuplicateEvents(studentEvents, teacherEvents).map((event, index) => <li key={event._id + index}>{`${event._id} - ${event.title} - ${event.grade} - ${event.color}`}</li>)}</div>
+            <Calendar
+                events={deleteDuplicateEvents(studentEvents, teacherEvents)}
+                isEditable={false}
+            />
         </div>
     );
 }

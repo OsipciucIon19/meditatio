@@ -33,4 +33,6 @@ router.post('/request-teacher-role', userController.requestTeacherRoles)
 router.post('/validate-teacher-role/:id', userController.validateTeacherRequest)
 router.post('/reject-teacher-role/:id', userController.rejectTeacherRequest)
 
+router.post('/payment/create')
+
 module.exports = router
