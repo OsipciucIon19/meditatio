@@ -37,7 +37,7 @@ const CourseDetails: FC = () => {
                                 <li key={teacher.lastName + teacher.firstName}>{teacher.firstName} <Button
                                     type="button"
                                     onClick={() => navigate('/schedule', {
-                                            state: { teacher }
+                                            state: { teacher, course }
                                         })}
                                 >Alege acest profesor</Button></li>
                             ) }

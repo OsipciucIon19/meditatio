@@ -4,6 +4,7 @@ import {useFetching} from 'hooks/useFetching'
 import EventService from 'services/EventService'
 import Calendar from 'components/calendar/Calendar'
 import {deleteDuplicateEvents} from 'utils/events'
+import ScheduleModal from "../../components/modal/ScheduleModal";
 
 type ScheduleProps = {
     userId: string,
@@ -13,6 +14,7 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
     const location = useLocation()
     const [studentEvents, setStudentEvents] = useState([])
     const [teacherEvents, setTeacherEvents] = useState([])
+    const [course, setCourse] = useState(null)
     const [fetchStudentEvents,, studentEventsError] = useFetching(async (id, roles): Promise<void> => {
         const response = await EventService.fetchEvents(id, roles)
         setStudentEvents([...studentEvents, ...response.data])
@@ -31,9 +33,10 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
     }
 
     useEffect(() => {
-        const { teacher } = location.state
+        const { teacher, course } = location.state
         fetchStudentEvents(userId, userRoles)
         fetchTeacherEvents(teacher._id, teacher.roles)
+        setCourse(course)
     }, [])
 
     return (
@@ -44,11 +47,14 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
             <div>{!studentEventsError && studentEvents?.map((event, index) => <div key={event._id + index}>{event.title + event.grade}</div>) }</div>
             <div>Teacher events:</div>
             <div>{!teacherEventsError && teacherEvents?.map((event, index) => <div key={event._id + index}>{event.title + event.grade}</div>) }</div>
-            <div>Test:</div>
+            <div>Merged events:</div>
             <div>{ deleteDuplicateEvents(studentEvents, teacherEvents).map((event, index) => <li key={event._id + index}>{`${event._id} - ${event.title} - ${event.grade} - ${event.color}`}</li>)}</div>
+            <div>Course: {course?.subject.title}</div>
             <Calendar
                 events={deleteDuplicateEvents(studentEvents, teacherEvents)}
                 isEditable={false}
+                course={course}
+                // teacherId={teacher._id}
             />
         </div>
     );

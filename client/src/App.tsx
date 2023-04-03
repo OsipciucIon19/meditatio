@@ -15,7 +15,7 @@ const App: FC = () => {
                 className="container position-relative"
                 style={{minHeight: 'calc(100vh - 498px)', margin: '2rem auto'}}
             >
-                <Router />                 
+                <Router />
             </div>
             <Footer />
         </div>

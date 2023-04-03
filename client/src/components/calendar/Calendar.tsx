@@ -6,17 +6,17 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import roLocale from '@fullcalendar/core/locales/ro'
 import {StyledCalendar} from './Calendar.styled'
 import {Event} from 'types/event'
-import {Button, Form, Input, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
-import DatePicker from 'react-widgets/DatePicker'
-import Localization from 'react-widgets/Localization'
-import {DateLocalizer} from 'react-widgets/IntlLocalizer'
+import {Button} from 'reactstrap'
+import ScheduleModal from "../modal/ScheduleModal";
+import {Course} from "../../types/course";
 
 type CalendarProps = {
     events: Array<Event>
     isEditable: boolean
+    course?: Course
 }
 
-const Calendar: FC<CalendarProps> = ({ events, isEditable= false }) => {
+const Calendar: FC<CalendarProps> = ({ events, isEditable= false, course }) => {
     const calendarRef = useRef(null);
     const [selectedEvent, setSelectedEvent] = useState(new Date())
     const isMobileScreen = window.screen.width < 768
@@ -45,7 +45,7 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable= false }) => {
     function renderEventContent(eventInfo) {
         return (
             <>
-                <b>{eventInfo.event.title}</b>, {eventInfo.timeText}
+                { eventInfo.event.title ? <><b>{eventInfo.event.title}</b>, {eventInfo.timeText}</> : eventInfo.timeText }
             </>
         )
     }
@@ -69,45 +69,12 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable= false }) => {
                 allDaySlot={false}
                 dateClick={handleDateClick}
             />
-            <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-                <ModalBody>
-                    <Localization date={new DateLocalizer({culture: 'ro', firstOfWeek: 1})}>
-                        <Form>
-                            <label htmlFor="title">Title:</label>
-                            <Input />
-                            <label>
-                                From:
-                            </label>
-                            <DatePicker
-                                value={selectedEvent}
-                                onChange={(value) => setSelectedEvent(value)}
-                                includeTime
-                            />
-                            <label>
-                                To:
-                            </label>
-                            <DatePicker
-                                value={new Date(selectedEvent.getTime() + 60 * 60 * 1000)}
-                                disabled
-                                includeTime
-                            />
-                        </Form>
-                    </Localization>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={() => {
-                        toggle()
-                        console.log(selectedEvent)
-                    }
-                    }>
-                        Do Something
-                    </Button>{' '}
-                    <Button color="secondary" onClick={toggle}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </Modal>
+            <ScheduleModal
+                modal={modal}
+                toggle={toggle}
+                event={selectedEvent}
+                course={course}
+            />
         </StyledCalendar>
     );
 }
