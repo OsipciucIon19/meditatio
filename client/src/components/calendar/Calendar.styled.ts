@@ -17,14 +17,6 @@ export const StyledCalendar = styled.div`
   .fc {
     max-height: 680px;
   }
-
-  //.fc-view-harness {
-  //  height: 600px!important;
-  //}
-  //
-  //.fc-scrollgrid-sync-table {
-  //  height: 565px!important;
-  //}
   
   .fc-button {
     border: 0;

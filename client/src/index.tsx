@@ -12,16 +12,16 @@ interface State {
 export const store = new Store()
 
 export const Context = createContext<State>({
-    store,
+	store,
 })
 
 ReactDOM.render(
-    <BrowserRouter>
-        <Context.Provider value={{
-            store
-        }}>
-            <App />
-        </Context.Provider>
-    </BrowserRouter>,
-    document.getElementById('root')
+	<BrowserRouter>
+		<Context.Provider value={{
+			store
+		}}>
+			<App />
+		</Context.Provider>
+	</BrowserRouter>,
+	document.getElementById('root')
 )
