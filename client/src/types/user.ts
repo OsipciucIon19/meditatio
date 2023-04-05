@@ -3,6 +3,6 @@ export interface User {
     lastName: string
     email: string
     isActivated: boolean
-    id: string
+    _id: string
     roles: Array<string>
 }

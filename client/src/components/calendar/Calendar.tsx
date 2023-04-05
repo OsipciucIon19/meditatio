@@ -9,14 +9,17 @@ import {Event} from 'types/event'
 import {Button} from 'reactstrap'
 import ScheduleModal from "../modal/ScheduleModal";
 import {Course} from "../../types/course";
+import {User} from "../../types/user";
 
 type CalendarProps = {
     events: Array<Event>
     isEditable: boolean
     course?: Course
+    studentId?: string
+    teacher?: User
 }
 
-const Calendar: FC<CalendarProps> = ({ events, isEditable= false, course }) => {
+const Calendar: FC<CalendarProps> = ({ events, isEditable= false, course, studentId, teacher }) => {
     const calendarRef = useRef(null);
     const [selectedEvent, setSelectedEvent] = useState(new Date())
     const isMobileScreen = window.screen.width < 768
@@ -74,9 +77,11 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable= false, course }) => {
                 toggle={toggle}
                 event={selectedEvent}
                 course={course}
+                studentId={studentId}
+                teacher={teacher}
             />
         </StyledCalendar>
     );
 }
 
-export default Calendar;
+export default Calendar

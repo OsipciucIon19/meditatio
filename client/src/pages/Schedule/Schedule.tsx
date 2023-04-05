@@ -5,16 +5,17 @@ import EventService from 'services/EventService'
 import Calendar from 'components/calendar/Calendar'
 import {deleteDuplicateEvents} from 'utils/events'
 import ScheduleModal from "../../components/modal/ScheduleModal";
+import {User} from "../../types/user";
 
 type ScheduleProps = {
-    userId: string,
+    userId: string
     userRoles: Array<string>
 }
 const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
     const location = useLocation()
     const [studentEvents, setStudentEvents] = useState([])
     const [teacherEvents, setTeacherEvents] = useState([])
-    const [course, setCourse] = useState(null)
+    const { teacher, course } = location.state
     const [fetchStudentEvents,, studentEventsError] = useFetching(async (id, roles): Promise<void> => {
         const response = await EventService.fetchEvents(id, roles)
         setStudentEvents([...studentEvents, ...response.data])
@@ -33,10 +34,8 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
     }
 
     useEffect(() => {
-        const { teacher, course } = location.state
         fetchStudentEvents(userId, userRoles)
         fetchTeacherEvents(teacher._id, teacher.roles)
-        setCourse(course)
     }, [])
 
     return (
@@ -45,6 +44,8 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
                 events={deleteDuplicateEvents(studentEvents, teacherEvents)}
                 isEditable={false}
                 course={course}
+                studentId={userId}
+                teacher={teacher}
             />
         </>
     );

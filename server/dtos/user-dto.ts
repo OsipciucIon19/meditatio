@@ -3,7 +3,7 @@ module.exports = class UserDto {
     lastName: string
     email: string
     roles: Array<string>
-    id: string
+    _id: string
     isActivated: boolean
 
     constructor(model) {
@@ -11,7 +11,7 @@ module.exports = class UserDto {
         this.lastName = model.lastName
         this.email = model.email
         this.roles = model.roles
-        this.id = model._id
+        this._id = model._id
         this.isActivated = model.isActivated
     }
 }

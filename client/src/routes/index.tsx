@@ -21,7 +21,7 @@ const Router = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [pathname])
-    
+
     const routeList = [
         {id: 'homePage', path: '/', element: <Home/>},
         {id: 'pricesPage', path: '/prices', element: <Prices/>},
@@ -31,14 +31,14 @@ const Router = () => {
         {
             id: 'schedulePage',
             path: '/schedule',
-            element: <Schedule userId={store?.user?.id} userRoles={store?.user?.roles}/>
+            element: <Schedule userId={store?.user._id} userRoles={store?.user.roles}/>
         },
         {id: 'loginPage', path: '/login', element: <LoginForm/>},
         {id: 'registrationPage', path: '/registration', element: <RegistrationForm/>},
         {
             id: 'userCalendarPage',
             path: '/calendar',
-            element: <UserCalendar userId={store?.user?.id} userRoles={store?.user?.roles}/>
+            element: <UserCalendar userId={store?.user._id} userRoles={store?.user.roles}/>
         },
         {id: 'checkoutPage', path: '/checkout', element: <Checkout />},
         {id: 'notFoundPage', path: '*', element: <NotFoundPage/>}
