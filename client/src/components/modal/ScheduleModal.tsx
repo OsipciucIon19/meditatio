@@ -148,7 +148,6 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
             </ModalBody>
             <ModalFooter>
                 <div><i>Total: {course?.price} lei</i></div>
-                <div><i>From: {fromEventHours} : {fromEventMinutes} To: {toEventHours} : {toEventMinutes}</i></div>
                 <Button color="primary" onClick={() => console.log({
                     student: studentId,
                     teacher: teacher._id,

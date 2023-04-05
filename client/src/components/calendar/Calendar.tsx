@@ -55,7 +55,7 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable= false, course, studen
 
     return (
         <StyledCalendar>
-            <Button onClick={() => setModal(true)}>Add schedule</Button>
+            <Button onClick={() => setModal(true)}>Programează o lecție</Button>
             <FullCalendar
                 ref={calendarRef}
                 locale={roLocale}

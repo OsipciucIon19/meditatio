@@ -2,11 +2,13 @@ import React, {FC, useEffect, useState} from 'react'
 import {useTitle} from 'hooks/useTitle'
 import HeroSection from 'components/hero/HeroSection'
 import image from 'assets/images/home/home-hero.webp'
+import teacherImage from 'assets/images/home/teacher-cta.webp'
 import CourseList from "../../components/courses/CourseList";
 import {Course} from "../../types/course";
 import {useFetching} from "../../hooks/useFetching";
 import CourseService from "../../services/CourseService";
-import {getPageCount} from "../../utils/pages";
+import Loader from "../../components/ui/Loader/Loader";
+import CallToAction from "../../components/cta/CallToAction";
 
 const Home: FC = () => {
     const heroData = {
@@ -24,8 +26,19 @@ const Home: FC = () => {
         setCourses([...courses, ...response.data])
     })
 
+    const callToActionList = [
+        {
+            title: 'Vrei să te alături echipei noastre de profesori?',
+            image: teacherImage,
+            body: <p>Poți deveni profesor la meditat.io prin completarea unui formular simplu, urmând pe link-ul de mai
+                jos</p>,
+            inverted: true,
+            link: {to: '/become-a-teacher', text: 'Completează formularul'}
+        }
+    ]
+
     useEffect(() => {
-        fetchCourses(4, 1)
+        fetchCourses(3, 1)
     }, [])
 
     useTitle('Pagina Principală')
@@ -40,8 +53,27 @@ const Home: FC = () => {
             />
             <section>
                 <h2 className="text-center">Descopera cele mai interesante cursuri!</h2>
-                <CourseList courses={courses} />
+                <hr/>
+                {areCoursesLoading && <Loader/>}
+                {
+                    courseError ?
+                        <div style={{textAlign: 'center'}}>
+                            Nu exista nici un curs!
+                        </div> :
+                        <CourseList courses={courses}/>
+                }
+                <hr/>
             </section>
+            {callToActionList.map(cta =>
+                <CallToAction
+                    key={cta.title.replaceAll(' ', '-')}
+                    title={cta.title}
+                    image={cta.image}
+                    body={cta.body}
+                    inverted={cta.inverted}
+                    link={cta.link}
+                />
+            )}
         </>
     )
 }
