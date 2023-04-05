@@ -9,11 +9,12 @@ type ScheduleProps = {
     userId: string
     userRoles: Array<string>
 }
-const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
+const Schedule: FC<ScheduleProps> = React.memo(({ userId, userRoles }) => {
 	const location = useLocation()
 	const [studentEvents, setStudentEvents] = useState([])
 	const [teacherEvents, setTeacherEvents] = useState([])
 	const { teacher, course } = location.state
+	const {_id: teacherId, roles: teacherRoles} = teacher
 	const [fetchStudentEvents,,] = useFetching(async (id, roles): Promise<void> => {
 		const response = await EventService.fetchEvents(id, roles)
 		setStudentEvents([...studentEvents, ...response.data])
@@ -24,7 +25,6 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
 		addEventColors(teacherEvents, 'red')
 	})
 
-
 	const addEventColors = (events, color) => {
 		events.forEach(event => {
 			event.color = color
@@ -32,8 +32,11 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
 	}
 
 	useEffect(() => {
-		fetchStudentEvents(userId, userRoles)
-		fetchTeacherEvents(teacher._id, teacher.roles)
+		const fetchData = async () => {
+			await fetchStudentEvents(userId, userRoles)
+			await fetchTeacherEvents(teacherId, teacherRoles)
+		}
+		fetchData().catch(console.error)
 	}, [])
 
 	return (
@@ -47,6 +50,6 @@ const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
 			/>
 		</>
 	)
-}
+})
 
 export default Schedule

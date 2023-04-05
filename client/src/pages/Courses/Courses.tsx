@@ -39,7 +39,10 @@ const Courses = () => {
 	useTitle('Cursuri Online')
 
 	useEffect(() => {
-		fetchCourses(limit, page)
+		const fetchData = async () => {
+			await fetchCourses(limit, page)
+		}
+		fetchData().catch(console.error)
 	}, [page, limit])
 
 	return (

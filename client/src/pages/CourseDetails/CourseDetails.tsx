@@ -10,7 +10,7 @@ import {Button} from 'reactstrap'
 
 const CourseDetails: FC = () => {
 	const navigate = useNavigate()
-	const params = useParams()
+	const {id} = useParams()
 	const [course, setCourse] = useState<Course>(null)
 	const [fetchCourse, isCourseLoading, courseError] = useFetching(async (id): Promise<void> => {
 		const response = await CourseService.fetchOneCourse(id)
@@ -18,8 +18,11 @@ const CourseDetails: FC = () => {
 	})
 
 	useEffect(() => {
-		fetchCourse(params.id)
-	}, [])
+		const fetchData = async () => {
+			await fetchCourse(id)
+		}
+		fetchData().catch(console.error)
+	}, [id])
 
 	useTitle(`${course?.subject.title}`)
     

@@ -38,7 +38,10 @@ const Home: FC = () => {
 	]
 
 	useEffect(() => {
-		fetchCourses(3, 1)
+		const fetchData = async () => {
+			await fetchCourses(3, 1)
+		}
+		fetchData().catch(console.error)
 	}, [])
 
 	useTitle('Pagina Principală')

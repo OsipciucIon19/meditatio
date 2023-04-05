@@ -20,14 +20,17 @@ const UserCalendar: FC<UserCalendarProps> = ({ userId, userRoles }) => {
 	useTitle('Calendar')
 
 	useEffect(() => {
-		setTimeout(() =>
-			fetchEvents(userId, userRoles), 1000)
+		const fetchData = async () => {
+			await fetchEvents(userId, userRoles)
+		}
+		fetchData().catch(console.error)
+
 	}, [])
 
 	return (
 		<>
 			<div>{events.map(event => <li key={event._id}>{event._id}</li>)}</div>
-			<Calendar events={events} isEditable={true} />
+			{/*<Calendar events={events} isEditable={true} />*/}
 		</>
 	)
 }
