@@ -38,7 +38,7 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable= false, course, studen
         return () => {
             window.onresize = null
         }
-    },[window.screen.width])
+    },[])
 
     const handleDateClick = (eventInfo) => {
         setSelectedEvent(eventInfo.date)
