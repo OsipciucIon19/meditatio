@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import { Button, Col, Form, Input, Row } from 'reactstrap'
 import { StyledHeroSection } from './HeroSection.styled'
 import { LazyLoadImage } from 'react-lazy-load-image-component'

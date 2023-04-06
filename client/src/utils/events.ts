@@ -1,4 +1,6 @@
-export const deleteDuplicateEvents = (studentEvents, teacherEvents) => {
+import { Event } from 'types/event'
+
+export const deleteDuplicateEvents = (studentEvents: Array<Event>, teacherEvents: Array<Event>): Array<Event> => {
 	teacherEvents.forEach(event => {
 		event.color = '#b4a696'
 	})

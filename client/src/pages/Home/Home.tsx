@@ -36,7 +36,6 @@ const Home: FC = () => {
 			link: { to: '/become-a-teacher', text: 'Completează formularul' }
 		}
 	]
-	console.log('render')
 
 	useEffect(() => {
 		const fetchData = async () => {

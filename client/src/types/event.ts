@@ -7,4 +7,5 @@ export interface Event {
     start: string
     end: string
     status?: string
+    color?: string
 }
