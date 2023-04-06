@@ -1,9 +1,9 @@
-import React, {FC} from 'react'
-import {Button} from 'reactstrap'
+import React, { FC } from 'react'
+import { Button } from 'reactstrap'
 import logo404 from 'assets/images/error/404-logo.svg'
-import {useNavigate} from 'react-router-dom'
-import {useTitle} from 'hooks/useTitle'
-import {LazyLoadImage} from 'react-lazy-load-image-component'
+import { useNavigate } from 'react-router-dom'
+import { useTitle } from 'hooks/useTitle'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
 const NotFoundPage: FC = () => {

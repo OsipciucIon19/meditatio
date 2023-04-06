@@ -1,15 +1,15 @@
-import React, {FC, useEffect, useRef, useState} from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import roLocale from '@fullcalendar/core/locales/ro'
-import {StyledCalendar} from './Calendar.styled'
-import {Event} from 'types/event'
-import {Button} from 'reactstrap'
+import { StyledCalendar } from './Calendar.styled'
+import { Event } from 'types/event'
+import { Button } from 'reactstrap'
 import ScheduleModal from '../modal/ScheduleModal'
-import {Course} from '../../types/course'
-import {User} from '../../types/user'
+import { Course } from '../../types/course'
+import { User } from '../../types/user'
 
 type CalendarProps = {
     events: Array<Event>
@@ -30,7 +30,7 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable= false, course, studen
 
 	useEffect(() => {
 		window.onresize = () => {
-			const {current: calendarDom} = calendarRef
+			const { current: calendarDom } = calendarRef
 			const API = calendarDom ? calendarDom.getApi() : null
 
 			window.screen.width > 768 ? API.changeView('timeGridWeek') : API.changeView('timeGridDay')

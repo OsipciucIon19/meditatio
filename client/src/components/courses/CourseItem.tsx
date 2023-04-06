@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
-import {Button} from 'reactstrap'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Button } from 'reactstrap'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
 const CourseItem = (props: any) => {
@@ -15,7 +15,7 @@ const CourseItem = (props: any) => {
 		>
 			<div
 				className="course-card__image"
-				style={{background: `url(/images/courses/${props.course.imagePath})`}}
+				style={{ background: `url(/images/courses/${props.course.imagePath})` }}
 			/>
 			<div className={`course-card__content ${areDetailsShown && 'blurry'}`}>
 				<h3 className="course-card__content__title mt-5">

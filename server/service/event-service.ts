@@ -1,8 +1,8 @@
-import {Event} from '../types'
+import { Event } from '../types'
 
 const EventModel = require('../models/Event')
 const constants = require('../constants')
-const {ObjectId} = require('mongodb')
+const { ObjectId } = require('mongodb')
 
 class EventService {
 	async getEvents(id: string, roles: string | string[]): Promise<Array<Event>> {
@@ -47,13 +47,13 @@ class EventService {
 	}
 
 	async addEvent(data: Event) {
-		await EventModel.create({...data, status: 'NEW'})
+		await EventModel.create({ ...data, status: 'NEW' })
 		return 'Evenimentul a fost adaugat cu succes'
 	}
 
 	async addEvents(data: Array<Event>) {
 		data.forEach((event) => {
-			EventModel.create({...event, status: 'NEW'})
+			EventModel.create({ ...event, status: 'NEW' })
 		})
 		return 'Evenimenntele au fost adaugate cu succes'
 	}

@@ -1,6 +1,6 @@
-import React, {FC, useContext, useEffect, useState} from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import logo from 'assets/images/logo.svg'
-import {Link, useLocation, useNavigate} from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
 	Navbar,
 	Button,
@@ -14,11 +14,11 @@ import {
 	DropdownItem,
 	DropdownMenu
 } from 'reactstrap'
-import {Context} from 'index'
-import {observer} from 'mobx-react-lite'
+import { Context } from 'index'
+import { observer } from 'mobx-react-lite'
 
 const NavigationBar: FC = () => {
-	const {store} = useContext(Context)
+	const { store } = useContext(Context)
 	const navigate = useNavigate()
 	const location = useLocation()
 	const [isNavbarOpen, setIsNavbarOpen] = useState(false)
@@ -28,9 +28,9 @@ const NavigationBar: FC = () => {
 	const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen)
 
 	const listLinks = [
-		{title: 'Cursuri', path: 'courses'},
-		{title: 'Prețuri', path: 'prices'},
-		{title: 'Despre noi', path: 'about-us'}
+		{ title: 'Cursuri', path: 'courses' },
+		{ title: 'Prețuri', path: 'prices' },
+		{ title: 'Despre noi', path: 'about-us' }
 	]
 
 	useEffect(() => {
@@ -63,7 +63,7 @@ const NavigationBar: FC = () => {
 								toggle={toggleDropdown}
 							>
 								<DropdownToggle
-									style={{cursor: 'pointer'}}
+									style={{ cursor: 'pointer' }}
 									data-toggle="dropdown"
 									tag="span"
 								>
@@ -71,7 +71,7 @@ const NavigationBar: FC = () => {
 										src={`https://ui-avatars.com/api/?name=${store.user.firstName}+${store.user.lastName}&size=200`}
 										width="40"
 										alt="avatar"
-										style={{borderRadius: '50px', margin: '0.3rem'}}
+										style={{ borderRadius: '50px', margin: '0.3rem' }}
 									/>
 								</DropdownToggle>
 								<DropdownMenu>
@@ -107,7 +107,7 @@ const NavigationBar: FC = () => {
 							<Link to="login" className="btn btn-secondary">
                                 Intră în cont
 							</Link>
-							<Link to="registration" style={{margin: '0.3rem'}}>
+							<Link to="registration" style={{ margin: '0.3rem' }}>
                                 Obține un cont
 							</Link>
 						</div>

@@ -1,5 +1,5 @@
-import React, {FC} from 'react'
-import {useTitle} from 'hooks/useTitle'
+import React, { FC } from 'react'
+import { useTitle } from 'hooks/useTitle'
 
 const AboutUs: FC = () => {
 	useTitle('Despre Noi')

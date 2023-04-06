@@ -1,6 +1,6 @@
-import React, {FC} from 'react'
-import {Elements} from '@stripe/react-stripe-js'
-import {loadStripe} from '@stripe/stripe-js'
+import React, { FC } from 'react'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import CheckoutForm from './CheckoutForm'
 
 const Checkout: FC = () => {

@@ -1,5 +1,5 @@
-import {Subject} from './subject'
-import {User} from './user'
+import { Subject } from './subject'
+import { User } from './user'
 
 export interface Course {
     _id: string

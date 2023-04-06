@@ -1,5 +1,5 @@
-import {FC} from 'react'
-import {useTitle} from '../../hooks/useTitle'
+import { FC } from 'react'
+import { useTitle } from '../../hooks/useTitle'
 
 const Prices: FC = () => {
 	useTitle('Prețuri')

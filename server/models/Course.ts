@@ -1,4 +1,4 @@
-import {Course} from '../types'
+import { Course } from '../types'
 
 const { Schema, model } = require('mongoose')
 const { ObjectId } = require('mongodb')

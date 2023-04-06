@@ -1,19 +1,19 @@
-import React, {FC} from 'react'
-import {Col, Container, NavItem, Row} from 'reactstrap'
-import {StyledFooter} from './Footer.styled'
-import {Link} from 'react-router-dom'
+import React, { FC } from 'react'
+import { Col, Container, NavItem, Row } from 'reactstrap'
+import { StyledFooter } from './Footer.styled'
+import { Link } from 'react-router-dom'
 import CopyrightFooter from './CopyrightFooter'
 
 const Footer: FC = () => {
 	const firstColumnLinks = [
-		{title: 'Cursuri', path: 'courses'},
-		{title: 'Prețuri', path: 'prices'},
-		{title: 'Devino profesor', path: 'become-a-teacher'}
+		{ title: 'Cursuri', path: 'courses' },
+		{ title: 'Prețuri', path: 'prices' },
+		{ title: 'Devino profesor', path: 'become-a-teacher' }
 	]
 
 	const secondColumnLinks = [
-		{title: 'Despre noi', path: 'about-us'},
-		{title: 'Cum funcționează', path: 'how-it-works'}
+		{ title: 'Despre noi', path: 'about-us' },
+		{ title: 'Cum funcționează', path: 'how-it-works' }
 	]
 
 	return (

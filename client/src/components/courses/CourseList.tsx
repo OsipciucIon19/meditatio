@@ -1,12 +1,12 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 import CourseItem from './CourseItem'
-import {Course} from 'types/course'
+import { Course } from 'types/course'
 
 type CoursesProps = {
     courses: Course[]
 }
 
-const CourseList: FC<CoursesProps> = ({courses}) => {
+const CourseList: FC<CoursesProps> = ({ courses }) => {
 	return (
 		<div className="courses-grid">
 			{ courses.map((course: Course, index: number) =>

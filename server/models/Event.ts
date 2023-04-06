@@ -1,4 +1,4 @@
-import {Event} from '../types'
+import { Event } from '../types'
 
 const { Schema, model } = require('mongoose')
 const { ObjectId } = require('mongodb')

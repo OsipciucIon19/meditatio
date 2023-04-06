@@ -35,6 +35,11 @@
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "react/display-name": "off"
     }
 }

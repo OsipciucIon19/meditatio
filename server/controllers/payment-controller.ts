@@ -1,4 +1,4 @@
-import {NextFunction, Request} from 'express'
+import { NextFunction, Request } from 'express'
 
 
 class PaymentController {

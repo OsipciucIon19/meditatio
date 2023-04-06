@@ -1,8 +1,8 @@
-import {Course} from '../types'
+import { Course } from '../types'
 
 const CourseModel = require('../models/Course')
 const UserModel = require('../models/User')
-const {ObjectId} = require('mongodb')
+const { ObjectId } = require('mongodb')
 const ApiError = require('../exceptions/api-error')
 
 class CourseService {
@@ -27,7 +27,7 @@ class CourseService {
 	async getCourseByCourseId(courseId: string) {
 		const agr = [
 			{
-				$match: {_id: ObjectId(courseId)}
+				$match: { _id: ObjectId(courseId) }
 			},
 			{
 				$lookup: {
@@ -57,7 +57,7 @@ class CourseService {
 			subjects: course.subject._id
 		})
 
-		return {...course, teachers}
+		return { ...course, teachers }
 	}
 }
 

@@ -1,5 +1,5 @@
-import React, {FC} from 'react'
-import {Input} from 'reactstrap'
+import React, { FC } from 'react'
+import { Input } from 'reactstrap'
 
 type TimeInputProps = {
   time: number
@@ -8,7 +8,7 @@ type TimeInputProps = {
   isFromInput?: boolean
 }
 
-const TimeInput: FC<TimeInputProps> = ({time, isHourFormat = false, handleChange, isFromInput}) => {
+const TimeInput: FC<TimeInputProps> = ({ time, isHourFormat = false, handleChange, isFromInput }) => {
 
 	return (
 		<Input

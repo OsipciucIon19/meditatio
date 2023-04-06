@@ -1,10 +1,10 @@
-import {FC, useContext, useState} from 'react'
-import {Button, Col, Form, Input, Row} from 'reactstrap'
-import {StyledHeroSection} from './HeroSection.styled'
-import {LazyLoadImage} from 'react-lazy-load-image-component'
+import { FC, useContext, useState } from 'react'
+import { Button, Col, Form, Input, Row } from 'reactstrap'
+import { StyledHeroSection } from './HeroSection.styled'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import {useNavigate} from 'react-router-dom'
-import {Context} from 'index'
+import { useNavigate } from 'react-router-dom'
+import { Context } from 'index'
 
 type HeroSectionProps = {
     inverted?: boolean,
@@ -14,8 +14,8 @@ type HeroSectionProps = {
     hasForm?: boolean
 }
 
-const HeroSection: FC<HeroSectionProps> = ({inverted, title, image, body, hasForm}) => {
-	const {store} = useContext(Context)
+const HeroSection: FC<HeroSectionProps> = ({ inverted, title, image, body, hasForm }) => {
+	const { store } = useContext(Context)
 	const [email, setEmail] = useState<string>('')
 	const rowDirection = inverted ? 'row-reverse' : 'row'
 	const navigate = useNavigate()
@@ -26,7 +26,7 @@ const HeroSection: FC<HeroSectionProps> = ({inverted, title, image, body, hasFor
 
 	return (
 		<StyledHeroSection>
-			<Row className="hero-row" style={{flexDirection: rowDirection}}>
+			<Row className="hero-row" style={{ flexDirection: rowDirection }}>
 				<Col>
 					<h1 className="hero-title">{title}</h1>
 					<div className="hero-body">
@@ -42,14 +42,14 @@ const HeroSection: FC<HeroSectionProps> = ({inverted, title, image, body, hasFor
 								onChange={ e => setEmail(e.target.value) }
 								value={ email }
 								placeholder="ex: ion.ionescu@mail.md"
-								style={{width: '50%'}}
+								style={{ width: '50%' }}
 								name="email"
 								type="email"
 							/>
 							<Button
 								disabled={store.isAuth}
 								type="submit"
-								onClick={() => navigate('/registration', {state: {email}})}
+								onClick={() => navigate('/registration', { state: { email } })}
 							>Obține un cont</Button>
 						</Form>
 					}

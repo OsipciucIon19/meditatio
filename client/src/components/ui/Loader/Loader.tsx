@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyledLoader} from './Loader.styled'
+import { StyledLoader } from './Loader.styled'
 import yellow from 'assets/images/loading/yellow.png'
 import brown from 'assets/images/loading/brown.png'
 import red from 'assets/images/loading/red.png'

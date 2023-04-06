@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 import {
 	CardElement,
 	useStripe,
@@ -16,7 +16,7 @@ const CheckoutForm: FC = () => {
 			return
 		}
 
-		const {error, paymentMethod} = await stripe.createPaymentMethod({
+		const { error, paymentMethod } = await stripe.createPaymentMethod({
 			type: 'card',
 			card: elements.getElement(CardElement),
 		})

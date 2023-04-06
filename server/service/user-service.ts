@@ -1,4 +1,4 @@
-import {TeacherRequest, User} from '../types'
+import { TeacherRequest, User } from '../types'
 
 const UserModel = require('../models/User')
 const TeacherRequestModel = require('../models/TeacherRequest')
@@ -13,7 +13,7 @@ const { ObjectId } = require('mongodb')
 
 class UserService {
 	async registration(email: string, password: string) {
-		const candidate = await UserModel.findOne({email})
+		const candidate = await UserModel.findOne({ email })
 		if (candidate) {
 			throw ApiError.BadRequest(`Utilizatorul cu posta ${email} deja exista`)
 		}
@@ -57,8 +57,8 @@ class UserService {
 	}
     
 	async requestTeacherRoles(data: TeacherRequest) {
-		const {email, password} = data
-		const candidate = await UserModel.findOne({email})
+		const { email, password } = data
+		const candidate = await UserModel.findOne({ email })
 
 		if (candidate) {
 			throw ApiError.BadRequest(`Utilizatorul cu posta ${email} deja exista`)
@@ -71,7 +71,7 @@ class UserService {
 		if (!ObjectId.isValid(requestId)) {
 			throw ApiError.BadRequest('Identificatorul nu este valid')
 		}
-		const request = await TeacherRequestModel.findByIdAndUpdate(ObjectId(requestId), {status: 'ACCEPTED'})
+		const request = await TeacherRequestModel.findByIdAndUpdate(ObjectId(requestId), { status: 'ACCEPTED' })
 		if (!request) {
 			throw ApiError.BadRequest('Cererea nu a fost gasita')
 		} else if (request.status === 'ACCEPTED') {
@@ -80,7 +80,7 @@ class UserService {
         
 		const teacherRole = constants.ROLE_TEACHER
 		const activationLink = uuid.v4()
-		const {firstName, lastName, email, password, subjects, phoneNumber} = request
+		const { firstName, lastName, email, password, subjects, phoneNumber } = request
 		const user = await UserModel.create({ 
 			firstName, lastName, email, password, roles: [teacherRole.value], activationLink, subjects, phoneNumber 
 		})
@@ -97,7 +97,7 @@ class UserService {
 		if (!ObjectId.isValid(requestId)) {
 			throw ApiError.BadRequest('Identificatorul nu este valid')
 		}
-		const request = await TeacherRequestModel.findByIdAndUpdate(ObjectId(requestId), {status: 'REFUSED'})
+		const request = await TeacherRequestModel.findByIdAndUpdate(ObjectId(requestId), { status: 'REFUSED' })
 		if (!request) {
 			throw ApiError.BadRequest('Cererea nu a fost gasita')
 		} else if (request.status === 'ACCEPTED') {

@@ -1,16 +1,16 @@
-import React, {FC, useContext, useEffect, useState} from 'react'
-import {Context} from 'index'
-import {observer} from 'mobx-react-lite'
-import {Input, Button, Spinner, Form, Label, ButtonGroup} from 'reactstrap'
-import {Link, useNavigate} from 'react-router-dom'
-import {useTitle} from 'hooks/useTitle'
-import {StyledLoginForm} from './LoginForm.styled'
+import React, { FC, useContext, useEffect, useState } from 'react'
+import { Context } from 'index'
+import { observer } from 'mobx-react-lite'
+import { Input, Button, Spinner, Form, Label, ButtonGroup } from 'reactstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import { useTitle } from 'hooks/useTitle'
+import { StyledLoginForm } from './LoginForm.styled'
 
 const LoginForm: FC = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
-	const {store} = useContext(Context)
+	const { store } = useContext(Context)
 	const navigate = useNavigate()
 
 	useTitle('Autentificare')
@@ -74,7 +74,7 @@ const LoginForm: FC = () => {
 									'Înainte'
 							}
 						</Button>
-						<span style={{margin: '1rem'}}>
+						<span style={{ margin: '1rem' }}>
                         Încă nu ai un cont? <Link to="/registration">Înregistrează-te</Link>
 						</span>
 					</ButtonGroup>

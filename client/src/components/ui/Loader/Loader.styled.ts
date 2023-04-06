@@ -4,7 +4,8 @@ export const StyledLoader = styled.div`
   padding: 0;
   margin: 0;
   font-family: 'Futura-Black', sans-serif;
-  position: absolute;
+  position: relative;
+  height: 250px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -13,6 +14,8 @@ export const StyledLoader = styled.div`
     display: flex;
     height: 100%;
     width: 100%;
+    position: absolute;
+    top: 50%;
   }
 
   .text-loading {

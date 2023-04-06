@@ -1,20 +1,20 @@
-import React, {FC, useEffect, useState} from 'react'
-import {useLocation} from 'react-router-dom'
-import {useFetching} from 'hooks/useFetching'
+import React, { FC, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useFetching } from 'hooks/useFetching'
 import EventService from 'services/EventService'
 import Calendar from 'components/calendar/Calendar'
-import {deleteDuplicateEvents} from 'utils/events'
+import { deleteDuplicateEvents } from 'utils/events'
 
 type ScheduleProps = {
     userId: string
     userRoles: Array<string>
 }
-const Schedule: FC<ScheduleProps> = React.memo(({ userId, userRoles }) => {
+const Schedule: FC<ScheduleProps> = ({ userId, userRoles }) => {
 	const location = useLocation()
 	const [studentEvents, setStudentEvents] = useState([])
 	const [teacherEvents, setTeacherEvents] = useState([])
 	const { teacher, course } = location.state
-	const {_id: teacherId, roles: teacherRoles} = teacher
+	const { _id: teacherId, roles: teacherRoles } = teacher
 	const [fetchStudentEvents,,] = useFetching(async (id, roles): Promise<void> => {
 		const response = await EventService.fetchEvents(id, roles)
 		setStudentEvents([...studentEvents, ...response.data])
@@ -50,6 +50,6 @@ const Schedule: FC<ScheduleProps> = React.memo(({ userId, userRoles }) => {
 			/>
 		</>
 	)
-})
+}
 
 export default Schedule

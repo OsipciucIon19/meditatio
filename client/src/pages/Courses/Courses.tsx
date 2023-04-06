@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import CourseList from 'components/courses/CourseList'
 import Loader from 'components/ui/Loader/Loader'
-import {useFetching} from 'hooks/useFetching'
+import { useFetching } from 'hooks/useFetching'
 import CourseService from 'services/CourseService'
-import {Course} from 'types/course'
-import {getPageCount} from 'utils/pages'
-import {useTitle} from 'hooks/useTitle'
+import { Course } from 'types/course'
+import { getPageCount } from 'utils/pages'
+import { useTitle } from 'hooks/useTitle'
 import HeroSection from 'components/hero/HeroSection'
 import coursesImage from 'assets/images/home/course-hero-image.webp'
 
@@ -53,13 +53,13 @@ const Courses = () => {
 				inverted={true}
 				image={heroData.image}
 			/>
-			<h2 style={{textAlign: 'center'}}>
+			<h2 style={{ textAlign: 'center' }}>
                 Alege cursul de care ai nevoie:
 			</h2>
 			{areCoursesLoading && <Loader/>}
 			{
 				courseError ?
-					<div style={{textAlign: 'center'}}>
+					<div style={{ textAlign: 'center' }}>
                         Nu exista nici un curs!
 					</div> :
 					<CourseList courses={courses}/>

@@ -1,9 +1,9 @@
-import React, {FC} from 'react'
-import {StyledCallToAction} from 'components/cta/CallToAction.styled'
-import {Col, Row} from 'reactstrap'
-import {LazyLoadImage} from 'react-lazy-load-image-component'
+import React, { FC } from 'react'
+import { StyledCallToAction } from 'components/cta/CallToAction.styled'
+import { Col, Row } from 'reactstrap'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 type CallToActionProps = {
@@ -14,12 +14,12 @@ type CallToActionProps = {
     link: {to: string, text: string}
 }
 
-const CallToAction: FC<CallToActionProps> = ({inverted, title, image, body, link}) => {
+const CallToAction: FC<CallToActionProps> = ({ inverted, title, image, body, link }) => {
 	const rowDirection = inverted ? 'row-reverse' : 'row'
 
 	return (
 		<StyledCallToAction>
-			<Row className="cta-row" style={{flexDirection: rowDirection}}>
+			<Row className="cta-row" style={{ flexDirection: rowDirection }}>
 				<Col>
 					<h2 className="cta-title">{title}</h2>
 					<div className="cta-body">

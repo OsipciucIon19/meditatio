@@ -1,6 +1,6 @@
-import React, {FC} from 'react'
-import {Col, Container, Row} from 'reactstrap'
-import {AiFillLinkedin, AiFillTwitterSquare, AiFillYoutube, AiFillFacebook} from 'react-icons/ai'
+import React, { FC } from 'react'
+import { Col, Container, Row } from 'reactstrap'
+import { AiFillLinkedin, AiFillTwitterSquare, AiFillYoutube, AiFillFacebook } from 'react-icons/ai'
 
 const CopyrightFooter: FC = () => {
 	const currentYear = new Date().getFullYear()

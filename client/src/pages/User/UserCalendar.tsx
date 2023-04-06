@@ -1,8 +1,8 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Calendar from 'components/calendar/Calendar'
-import {useTitle} from 'hooks/useTitle'
-import {Event} from 'types/event'
-import {useFetching} from 'hooks/useFetching'
+import { useTitle } from 'hooks/useTitle'
+import { Event } from 'types/event'
+import { useFetching } from 'hooks/useFetching'
 import EventService from 'services/EventService'
 
 type UserCalendarProps = {
@@ -30,7 +30,7 @@ const UserCalendar: FC<UserCalendarProps> = ({ userId, userRoles }) => {
 	return (
 		<>
 			<div>{events.map(event => <li key={event._id}>{event._id}</li>)}</div>
-			{/*<Calendar events={events} isEditable={true} />*/}
+			<Calendar events={events} isEditable={true} />
 		</>
 	)
 }

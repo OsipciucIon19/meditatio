@@ -1,4 +1,4 @@
-import {User} from '../types'
+import { User } from '../types'
 
 const { Schema, model } = require('mongoose')
 const { ObjectId } = require('mongodb')

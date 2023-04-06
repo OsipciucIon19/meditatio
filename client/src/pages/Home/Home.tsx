@@ -1,11 +1,11 @@
-import React, {FC, useEffect, useState} from 'react'
-import {useTitle} from 'hooks/useTitle'
+import React, { FC, useEffect, useState } from 'react'
+import { useTitle } from 'hooks/useTitle'
 import HeroSection from 'components/hero/HeroSection'
 import image from 'assets/images/home/home-hero.webp'
 import teacherImage from 'assets/images/home/teacher-cta.webp'
 import CourseList from '../../components/courses/CourseList'
-import {Course} from '../../types/course'
-import {useFetching} from '../../hooks/useFetching'
+import { Course } from '../../types/course'
+import { useFetching } from '../../hooks/useFetching'
 import CourseService from '../../services/CourseService'
 import Loader from '../../components/ui/Loader/Loader'
 import CallToAction from '../../components/cta/CallToAction'
@@ -33,9 +33,10 @@ const Home: FC = () => {
 			body: <p>Poți deveni profesor la meditat.io prin completarea unui formular simplu, urmând pe link-ul de mai
                 jos</p>,
 			inverted: true,
-			link: {to: '/become-a-teacher', text: 'Completează formularul'}
+			link: { to: '/become-a-teacher', text: 'Completează formularul' }
 		}
 	]
+	console.log('render')
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -60,7 +61,7 @@ const Home: FC = () => {
 				{areCoursesLoading && <Loader/>}
 				{
 					courseError ?
-						<div style={{textAlign: 'center'}}>
+						<div style={{ textAlign: 'center' }}>
                             Nu exista nici un curs!
 						</div> :
 						<CourseList courses={courses}/>

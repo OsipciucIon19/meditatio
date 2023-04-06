@@ -1,10 +1,10 @@
-import React, {FC, useEffect, useState} from 'react'
-import {Button, Form, Input, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
+import React, { FC, useEffect, useState } from 'react'
+import { Button, Form, Input, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import Localization from 'react-widgets/Localization'
-import {DateLocalizer} from 'react-widgets/IntlLocalizer'
-import {Course} from '../../types/course'
+import { DateLocalizer } from 'react-widgets/IntlLocalizer'
+import { Course } from '../../types/course'
 import TimeInput from '../ui/TimeInput/TimeInput'
-import {User} from '../../types/user'
+import { User } from '../../types/user'
 
 type ScheduleModalProps = {
     modal: boolean
@@ -16,7 +16,7 @@ type ScheduleModalProps = {
 }
 
 const ScheduleModal: FC<ScheduleModalProps> = (props) => {
-	const {modal, toggle, event, course, teacher, studentId} = props
+	const { modal, toggle, event, course, teacher, studentId } = props
 	const [toEventHours, setToEventHours] = useState<number>(0)
 	const [fromEventHours, setFromEventHours] = useState<number>(0)
 	const [toEventMinutes, setToEventMinutes] = useState<number>(0)
@@ -76,7 +76,7 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
 		<Modal isOpen={modal} toggle={toggle}>
 			<ModalHeader>Add event</ModalHeader>
 			<ModalBody>
-				<Localization date={new DateLocalizer({culture: 'ro', firstOfWeek: 1})}>
+				<Localization date={new DateLocalizer({ culture: 'ro', firstOfWeek: 1 })}>
 					<Form>
 						<div>Title: {course?.subject.title} clasa {course?.subject.grade}</div>
 						<div>course id: {course?._id}</div>
