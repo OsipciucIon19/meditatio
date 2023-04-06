@@ -6,33 +6,33 @@ import { useFetching } from 'hooks/useFetching'
 import EventService from 'services/EventService'
 
 type UserCalendarProps = {
-    userId: string,
-    userRoles: Array<string>
+  userId: string,
+  userRoles: Array<string>
 }
 
 const UserCalendar: FC<UserCalendarProps> = ({ userId, userRoles }) => {
-	const [events, setEvents] = useState<Array<Event>>([])
-	const [fetchEvents,,] = useFetching(async (id, roles): Promise<void> => {
-		const response = await EventService.fetchEvents(id, roles)
-		setEvents([...events, ...response.data])
-	})
+  const [events, setEvents] = useState<Array<Event>>([])
+  const [fetchEvents,,] = useFetching(async (id, roles): Promise<void> => {
+    const response = await EventService.fetchEvents(id, roles)
+    setEvents([...events, ...response.data])
+  })
 
-	useTitle('Calendar')
+  useTitle('Calendar')
 
-	useEffect(() => {
-		const fetchData = async () => {
-			await fetchEvents(userId, userRoles)
-		}
-		fetchData().catch(console.error)
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchEvents(userId, userRoles)
+    }
+    fetchData().catch(console.error)
 
-	}, [])
+  }, [])
 
-	return (
-		<>
-			<div>{events.map(event => <li key={event._id}>{event._id}</li>)}</div>
-			<Calendar events={events} isEditable={true} />
-		</>
-	)
+  return (
+    <>
+      <div>{events.map(event => <li key={event._id}>{event._id}</li>)}</div>
+      <Calendar events={events} isEditable={true} />
+    </>
+  )
 }
 
 export default UserCalendar

@@ -7,39 +7,39 @@ import { Link } from 'react-router-dom'
 
 
 type CallToActionProps = {
-    inverted?: boolean,
-    title: string,
-    image?: string,
-    body?: JSX.Element,
-    link: {to: string, text: string}
+  inverted?: boolean,
+  title: string,
+  image?: string,
+  body?: JSX.Element,
+  link: {to: string, text: string}
 }
 
 const CallToAction: FC<CallToActionProps> = ({ inverted, title, image, body, link }) => {
-	const rowDirection = inverted ? 'row-reverse' : 'row'
+  const rowDirection = inverted ? 'row-reverse' : 'row'
 
-	return (
-		<StyledCallToAction>
-			<Row className="cta-row" style={{ flexDirection: rowDirection }}>
-				<Col>
-					<h2 className="cta-title">{title}</h2>
-					<div className="cta-body">
-						{body}
-					</div>
-					<Link to={link.to} className="btn btn-secondary">{link.text}</Link>
-				</Col>
-				<Col>
-					{image && <LazyLoadImage
-						className="cta-image"
-						src={image}
-						width="500"
-						alt={`cta-${title}`}
-						effect="blur"
-					/>}
-				</Col>
-			</Row>
-		</StyledCallToAction>
+  return (
+    <StyledCallToAction>
+      <Row className="cta-row" style={{ flexDirection: rowDirection }}>
+        <Col>
+          <h2 className="cta-title">{title}</h2>
+          <div className="cta-body">
+            {body}
+          </div>
+          <Link to={link.to} className="btn btn-secondary">{link.text}</Link>
+        </Col>
+        <Col>
+          {image && <LazyLoadImage
+            className="cta-image"
+            src={image}
+            width="500"
+            alt={`cta-${title}`}
+            effect="blur"
+          />}
+        </Col>
+      </Row>
+    </StyledCallToAction>
 
-	)
+  )
 }
 
 export default CallToAction

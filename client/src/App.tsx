@@ -8,18 +8,18 @@ import 'react-widgets/styles.css'
 
 const App: FC = () => {
 
-	return (
-		<div>
-			<NavigationBar />
-			<div
-				className="container position-relative"
-				style={{ minHeight: 'calc(100vh - 498px)', margin: '2rem auto' }}
-			>
-				<Router />
-			</div>
-			<Footer />
-		</div>
-	)
+  return (
+    <div>
+      <NavigationBar />
+      <div
+        className="container position-relative"
+        style={{ minHeight: 'calc(100vh - 498px)', margin: '2rem auto' }}
+      >
+        <Router />
+      </div>
+      <Footer />
+    </div>
+  )
 }
 
 export default observer(App)

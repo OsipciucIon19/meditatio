@@ -9,46 +9,46 @@ import { useTitle } from '../../hooks/useTitle'
 import { Button } from 'reactstrap'
 
 const CourseDetails: FC = () => {
-	const navigate = useNavigate()
-	const { id } = useParams()
-	const [course, setCourse] = useState<Course>(null)
-	const [fetchCourse, isCourseLoading, courseError] = useFetching(async (id): Promise<void> => {
-		const response = await CourseService.fetchOneCourse(id)
-		setCourse(response.data)
-	})
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const [course, setCourse] = useState<Course>(null)
+  const [fetchCourse, isCourseLoading, courseError] = useFetching(async (id): Promise<void> => {
+    const response = await CourseService.fetchOneCourse(id)
+    setCourse(response.data)
+  })
 
-	useEffect(() => {
-		const fetchData = async () => {
-			await fetchCourse(id)
-		}
-		fetchData().catch(console.error)
-	}, [id])
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchCourse(id)
+    }
+    fetchData().catch(console.error)
+  }, [id])
 
-	useTitle(`${course?.subject.title}`)
-    
-	return (
-		<div>
-			{isCourseLoading ?
-				<Loader/> :
-				courseError.length ?
-					<NotFoundPage/> :
-					<div>
-						<h1>{`${course?.subject?.title} cl ${course?.subject?.grade}`}</h1>
-						<div>{course?.price} lei per ora</div>
-						<div>
-							{ course?.teachers.map(teacher =>
-								<li key={teacher.lastName + teacher.firstName}>{teacher.firstName} <Button
-									type="button"
-									onClick={() => navigate('/schedule', {
-										state: { teacher, course }
-									})}
-								>Alege acest profesor</Button></li>
-							) }
-						</div>
-					</div>
-			}
-		</div>
-	)
+  useTitle(`${course?.subject.title}`)
+
+  return (
+    <div>
+      {isCourseLoading ?
+        <Loader/> :
+        courseError.length ?
+          <NotFoundPage/> :
+          <div>
+            <h1>{`${course?.subject?.title} cl ${course?.subject?.grade}`}</h1>
+            <div>{course?.price} lei per ora</div>
+            <div>
+              { course?.teachers.map(teacher =>
+                <li key={teacher.lastName + teacher.firstName}>{teacher.firstName} <Button
+                  type="button"
+                  onClick={() => navigate('/schedule', {
+                    state: { teacher, course }
+                  })}
+                >Alege acest profesor</Button></li>
+              ) }
+            </div>
+          </div>
+      }
+    </div>
+  )
 }
 
 export default CourseDetails
