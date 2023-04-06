@@ -59,6 +59,7 @@ const LoginForm: FC = () => {
             <Button
               className="registration__form__button"
               type="submit"
+              disabled={isLoading}
               color="primary"
               onClick={registerUser}
             >

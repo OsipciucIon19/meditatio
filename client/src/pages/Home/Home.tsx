@@ -16,7 +16,7 @@ const Home: FC = () => {
     image: image,
     body: <><p>Platforma ta completă pentru a obține meditații și a studia orele
       preferate.</p>
-      <p><i>* Completează câmpul liber de mai jos cu poșta ta electronică pentru a putea urma procedura de
+    <p><i>* Completează câmpul liber de mai jos cu poșta ta electronică pentru a putea urma procedura de
         înregistrare.</i></p></>
   }
   const [courses, setCourses] = useState<Course[]>([])

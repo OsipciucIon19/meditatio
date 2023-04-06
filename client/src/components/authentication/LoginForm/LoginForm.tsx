@@ -64,6 +64,7 @@ const LoginForm: FC = () => {
           <ButtonGroup className="float-end align-items-center">
             <Button
               className="auth__form__button"
+              disabled={isLoading}
               type="submit"
               color="secondary"
               onClick={authenticateUser}
