@@ -11,7 +11,7 @@ import CourseDetails from 'pages/CourseDetails/CourseDetails'
 import UserCalendar from '../pages/User/UserCalendar'
 import Schedule from 'pages/Schedule/Schedule'
 import { observer } from 'mobx-react-lite'
-import { Context } from 'index'
+import { Context } from 'App'
 import Checkout from '../pages/Checkout/Checkout'
 
 const Router = () => {

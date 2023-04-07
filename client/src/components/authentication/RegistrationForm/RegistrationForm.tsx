@@ -1,5 +1,5 @@
 import React, { FC, useContext, useState } from 'react'
-import { Context } from 'index'
+import { Context } from 'App'
 import { observer } from 'mobx-react-lite'
 import { Input, Button, Spinner, Form, Label, ButtonGroup } from 'reactstrap'
 import { useTitle } from 'hooks/useTitle'
@@ -65,7 +65,7 @@ const LoginForm: FC = () => {
             >
               {
                 isLoading ?
-                  <Spinner className="mx-2" size="sm" color="light"/> :
+                  <Spinner className="mx-2" size="sm" color="light" /> :
                   'Înainte'
               }
             </Button>

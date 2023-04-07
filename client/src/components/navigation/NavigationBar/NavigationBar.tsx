@@ -14,7 +14,7 @@ import {
   DropdownItem,
   DropdownMenu
 } from 'reactstrap'
-import { Context } from 'index'
+import { Context } from 'App'
 import { observer } from 'mobx-react-lite'
 
 const NavigationBar: FC = () => {
@@ -42,7 +42,7 @@ const NavigationBar: FC = () => {
   }, [store, location])
 
   return (
-    <Navbar className="blurry-bg" sticky="top" expand="md">
+    <Navbar className="blurry-bg" sticky="top" expand="md" data-testid="NavigationBar">
       <Link
         className="navbar-brand" to="/">
         <img className="logo-image" src={logo} alt="logo" width="70" height="70"/>

@@ -18,7 +18,7 @@ const Footer: FC = () => {
 
   return (
     <StyledFooter>
-      <Container>
+      <Container data-testid="Footer">
         <Row className="py-4">
           <Col>
             <Link to="/" className="logo-title footer-logo">meditat.io</Link>
