@@ -20,7 +20,7 @@ export interface User extends Document {
   lastName: string,
   email: string,
   password: string,
-  roles: Array<String>,
+  roles: string[],
   isActivated: boolean,
   activationLink: string,
   subjects?: Array<Subject>,
@@ -49,4 +49,14 @@ export interface Event extends Document {
   start: Date,
   end: Date,
   status?: string
+}
+
+export interface Order extends Document {
+  event: string,
+  addressCity: string,
+  addressCountry: string,
+  addressLine1: string,
+  addressLine2?: string,
+  addressZip: string,
+  paid: boolean
 }

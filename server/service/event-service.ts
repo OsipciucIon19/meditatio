@@ -47,8 +47,8 @@ class EventService {
   }
 
   async addEvent(data: Event) {
-    await EventModel.create({ ...data, status: 'NEW' })
-    return 'Evenimentul a fost adaugat cu succes'
+    const { _id } = await EventModel.create({ ...data, status: 'NEW' })
+    return _id.toString()
   }
 
   async addEvents(data: Array<Event>) {

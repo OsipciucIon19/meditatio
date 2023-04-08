@@ -5,6 +5,7 @@ import { DateLocalizer } from 'react-widgets/IntlLocalizer'
 import { Course } from '../../types/course'
 import TimeInput from '../ui/TimeInput/TimeInput'
 import { User } from '../../types/user'
+import { useNavigate } from 'react-router-dom'
 
 type ScheduleModalProps = {
   modal: boolean
@@ -16,6 +17,7 @@ type ScheduleModalProps = {
 }
 
 const ScheduleModal: FC<ScheduleModalProps> = (props) => {
+  const navigate = useNavigate()
   const { modal, toggle, event, course, teacher, studentId } = props
   const [toEventHours, setToEventHours] = useState<number>(0)
   const [fromEventHours, setFromEventHours] = useState<number>(0)
@@ -71,6 +73,20 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
   const handleSelectChange = (event) => {
     setDaysAmountSelected(event.target.value)
   }
+
+  const handlePaymentClick = () =>
+    navigate('/checkout', {
+      state: {
+        eventInfo: {
+          student: studentId,
+          teacher: teacher._id,
+          course: course._id,
+          start: new Date(event.getFullYear(), event.getMonth(), event.getDate(), fromEventHours, fromEventMinutes),
+          end: new Date(event.getFullYear(), event.getMonth(), event.getDate(), toEventHours, toEventMinutes),
+          amount: course.price
+        }
+      }
+    })
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
@@ -147,13 +163,7 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
       </ModalBody>
       <ModalFooter>
         <div><i>Total: {course?.price} lei</i></div>
-        <Button color="primary" onClick={() => console.log({
-          student: studentId,
-          teacher: teacher._id,
-          course: course._id,
-          start: new Date(event.getFullYear(), event.getMonth(), event.getDate(), fromEventHours, fromEventMinutes),
-          end: new Date(event.getFullYear(), event.getMonth(), event.getDate(), toEventHours, toEventMinutes)
-        })}>
+        <Button color="primary" onClick={() => handlePaymentClick()}>
           Continuă spre plată
         </Button>
         <Button color="danger" onClick={(e: React.KeyboardEvent<any> & React.MouseEvent<any, MouseEvent>) => {

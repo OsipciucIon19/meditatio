@@ -3,6 +3,7 @@ const userController = require('../controllers/user-controller')
 const courseController = require('../controllers/course-controller')
 const subjectController = require('../controllers/subject-controller')
 const eventController = require('../controllers/event-controller')
+const paymentController = require('../controllers/payment-controller')
 const router = new Router()
 const { body } = require('express-validator')
 const roleMiddleware = require('../middleware/role-middleware')
@@ -33,6 +34,6 @@ router.post('/request-teacher-role', userController.requestTeacherRoles)
 router.post('/validate-teacher-role/:id', userController.validateTeacherRequest)
 router.post('/reject-teacher-role/:id', userController.rejectTeacherRequest)
 
-router.post('/payment/create')
+router.post('/payment/create', paymentController.createPayment)
 
 module.exports = router
