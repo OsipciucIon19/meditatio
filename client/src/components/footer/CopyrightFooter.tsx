@@ -15,16 +15,16 @@ const CopyrightFooter: FC = () => {
           <Col>
 
             <ul className="align-items-center mb-0">
-              <li><a className="nav-link" href="https://facebook.com/">
+              <li><a className="nav-link" href="https://facebook.com/" style={{ color: '#fff' }}>
                 <AiFillFacebook size={20}/>
               </a></li>
-              <li><a className="nav-link" href="https://twitter.com/">
+              <li><a className="nav-link" href="https://twitter.com/" style={{ color: '#fff' }}>
                 <AiFillTwitterSquare size={20}/>
               </a></li>
-              <li><a className="nav-link" href="https://youtube.com/">
+              <li><a className="nav-link" href="https://youtube.com/" style={{ color: '#fff' }}>
                 <AiFillYoutube size={20}/>
               </a></li>
-              <li><a className="nav-link" href="https://linkedin.com/">
+              <li><a className="nav-link" href="https://linkedin.com/" style={{ color: '#fff' }}>
                 <AiFillLinkedin size={20}/>
               </a></li>
             </ul>

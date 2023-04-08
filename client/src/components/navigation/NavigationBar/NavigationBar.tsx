@@ -16,6 +16,7 @@ import {
 } from 'reactstrap'
 import { Context } from 'App'
 import { observer } from 'mobx-react-lite'
+import { RxHamburgerMenu } from 'react-icons/all'
 
 const NavigationBar: FC = () => {
   const { store } = useContext(Context)
@@ -48,7 +49,9 @@ const NavigationBar: FC = () => {
         <img className="logo-image" src={logo} alt="logo" width="70" height="70"/>
         <span className="logo-title">meditat.io</span>
       </Link>
-      <NavbarToggler onClick={toggleNavbar}/>
+      <NavbarToggler onClick={toggleNavbar}>
+        <RxHamburgerMenu />
+      </NavbarToggler>
       <Collapse isOpen={isNavbarOpen} navbar>
         <Nav className="me-auto" navbar>
           {listLinks.map(link => <NavItem key={link.path}><Link
@@ -107,7 +110,7 @@ const NavigationBar: FC = () => {
               <Link to="login" className="btn btn-secondary">
                 Intră în cont
               </Link>
-              <Link to="registration" style={{ margin: '0.3rem' }}>
+              <Link to="registration" style={{ color: '#000', margin: '0.3rem' }}>
                 Obține un cont
               </Link>
             </div>
