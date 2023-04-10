@@ -29,7 +29,7 @@ const UserCalendar: FC<UserCalendarProps> = ({ userId, userRoles }) => {
 
   return (
     <>
-      <div>{events.map(event => <li key={event._id}>{event._id}</li>)}</div>
+      <h1>Vezi aici agenda ta</h1>
       <Calendar events={events} isEditable={true} />
     </>
   )

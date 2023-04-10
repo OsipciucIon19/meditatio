@@ -4,11 +4,11 @@ const UserModel = require('../models/User')
 const TeacherRequestModel = require('../models/TeacherRequest')
 const bcrypt = require('bcryptjs')
 const uuid = require('uuid')
-const mailService = require('./mail-service')
+// const mailService = require('./mail-service')
 const tokenService = require('./token-service')
 const UserDto = require('../dtos/user-dto')
 const ApiError = require('../exceptions/api-error')
-const constants = require('../constants')
+const { ROLE_STUDENT, ROLE_TEACHER } = require('../constants')
 const { ObjectId } = require('mongodb')
 
 class UserService {
@@ -18,7 +18,7 @@ class UserService {
       throw ApiError.BadRequest(`Utilizatorul cu posta ${email} deja exista`)
     }
     const hashPassword = await bcrypt.hash(password, 3)
-    const userRole = constants.ROLE_STUDENT
+    const userRole = ROLE_STUDENT
     const activationLink = uuid.v4()
 
     const user = await UserModel.create({
@@ -27,10 +27,11 @@ class UserService {
       email,
       phoneNumber,
       password: hashPassword,
-      roles: [userRole.value],
+      roles: [userRole],
       activationLink
     })
-    await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+    console.log('user role: ', userRole, '')
+    // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
     const userDto = new UserDto(user)
     const tokens = tokenService.generateTokens({ ...userDto })
@@ -86,13 +87,13 @@ class UserService {
       throw ApiError.BadRequest('Cererea a fost deja acceptata')
     }
 
-    const teacherRole = constants.ROLE_TEACHER
+    const teacherRole = ROLE_TEACHER
     const activationLink = uuid.v4()
     const { firstName, lastName, email, password, subjects, phoneNumber } = request
     const user = await UserModel.create({
-      firstName, lastName, email, password, roles: [teacherRole.value], activationLink, subjects, phoneNumber
+      firstName, lastName, email, password, roles: [teacherRole], activationLink, subjects, phoneNumber
     })
-    await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+    // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
     const userDto = new UserDto(user)
     const tokens = tokenService.generateTokens({ ...userDto })

@@ -1,9 +1,9 @@
-import React, { FC, useContext, useState } from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import { Context } from 'App'
 import { observer } from 'mobx-react-lite'
 import { Input, Button, Spinner, Form, Label, ButtonGroup } from 'reactstrap'
 import { useTitle } from 'hooks/useTitle'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { StyledRegistrationForm } from './RegistrationForm.styled'
 
 const LoginForm: FC = () => {
@@ -15,6 +15,7 @@ const LoginForm: FC = () => {
   const [password, setPassword] = useState<string>('')
   const { store } = useContext(Context)
   const location = useLocation()
+  const navigate = useNavigate()
 
   useTitle('Înregistrare')
 
@@ -27,6 +28,12 @@ const LoginForm: FC = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
+
+  useEffect(() => {
+    if (store.isAuth) {
+      return navigate('/profile')
+    }
+  }, [store.isAuth, navigate])
 
   return (
     <StyledRegistrationForm className="blurry-bg">
@@ -65,7 +72,7 @@ const LoginForm: FC = () => {
             id="email"
             onChange={e => setEmail(e.target.value)}
             name="email"
-            value={location.state?.email ? location.state.email : email}
+            value={email}
             type="email"
             placeholder="ion.ionescu@mail.md"
           />
