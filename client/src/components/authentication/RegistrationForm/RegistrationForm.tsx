@@ -9,6 +9,9 @@ import { StyledRegistrationForm } from './RegistrationForm.styled'
 const LoginForm: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
+  const [firstName, setFirstName] = useState<string>('')
+  const [lastName, setLastName] = useState<string>('')
+  const [phoneNumber, setPhoneNumber] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const { store } = useContext(Context)
   const location = useLocation()
@@ -17,7 +20,7 @@ const LoginForm: FC = () => {
 
   const registerUser = async () => {
     setIsLoading(true)
-    await store.registration(email, password)
+    await store.registration(email, password, firstName, lastName, phoneNumber)
     setIsLoading(false)
   }
 
@@ -33,6 +36,28 @@ const LoginForm: FC = () => {
           className="registration__form"
           onSubmit={handleSubmit}
         >
+          <Label for="firstName">
+            Numele
+          </Label>
+          <Input
+            id="firstName"
+            onChange={e => setFirstName(e.target.value)}
+            name="firstName"
+            value={firstName}
+            type="text"
+            placeholder="Ionescu"
+          />
+          <Label for="lastName">
+            Prenumele
+          </Label>
+          <Input
+            id="lastName"
+            onChange={e => setLastName(e.target.value)}
+            name="lastName"
+            value={lastName}
+            type="text"
+            placeholder="Ion"
+          />
           <Label for="email">
             Email
           </Label>
@@ -43,6 +68,17 @@ const LoginForm: FC = () => {
             value={location.state?.email ? location.state.email : email}
             type="email"
             placeholder="ion.ionescu@mail.md"
+          />
+          <Label for="phoneNumber">
+            Numarul de telefon
+          </Label>
+          <Input
+            id="phoneNumber"
+            onChange={e => setPhoneNumber(e.target.value)}
+            name="phoneNumber"
+            value={phoneNumber}
+            type="text"
+            placeholder="+373 60 000 000"
           />
           <Label for="password">
             Parolă

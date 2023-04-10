@@ -12,7 +12,7 @@ const constants = require('../constants')
 const { ObjectId } = require('mongodb')
 
 class UserService {
-  async registration(email: string, password: string) {
+  async registration(email: string, password: string, firstName: string, lastName: string, phoneNumber: string) {
     const candidate = await UserModel.findOne({ email })
     if (candidate) {
       throw ApiError.BadRequest(`Utilizatorul cu posta ${email} deja exista`)
@@ -21,7 +21,15 @@ class UserService {
     const userRole = constants.ROLE_STUDENT
     const activationLink = uuid.v4()
 
-    const user = await UserModel.create({ email, password: hashPassword, roles: [userRole.value], activationLink })
+    const user = await UserModel.create({
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      password: hashPassword,
+      roles: [userRole.value],
+      activationLink
+    })
     await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
     const userDto = new UserDto(user)
