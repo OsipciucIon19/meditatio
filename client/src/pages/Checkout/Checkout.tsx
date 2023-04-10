@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Button, Container } from 'reactstrap'
+import { Button, Container, Spinner, Toast, ToastHeader } from 'reactstrap'
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -8,7 +8,7 @@ const Checkout: FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const [event, setEvent] = useState(null)
-  // const priceForStripe = product.amount * 100
+  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false)
 
   useEffect(() => {
     const { eventInfo } = location?.state
@@ -18,6 +18,7 @@ const Checkout: FC = () => {
   }, [])
 
   const paymentToken = async (token) => {
+    setIsPaymentProcessing(true)
     try {
       const response = await axios({
         url: 'http://localhost:5000/api/payment/create',
@@ -33,11 +34,25 @@ const Checkout: FC = () => {
       }
     } catch (e) {
       console.log(e)
+    } finally {
+      setIsPaymentProcessing(false)
     }
   }
 
   return (
     <Container>
+      {isPaymentProcessing &&
+          <div className="p-3 position-absolute" style={{ top: '0', right: '0' }}>
+            <Toast
+              className="d-inline-block m-1 bg-success"
+              bg="Success"
+            >
+              <ToastHeader icon={<Spinner size="sm">Loading...</Spinner>}>
+                Plata dvs la moment se procesează
+              </ToastHeader>
+            </Toast>
+          </div>
+      }
       <h2>Payment</h2>
       <p>
         Product: {event?.student}

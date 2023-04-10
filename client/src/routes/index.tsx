@@ -13,6 +13,8 @@ import Schedule from 'pages/Schedule/Schedule'
 import { observer } from 'mobx-react-lite'
 import { Context } from 'App'
 import Checkout from '../pages/Checkout/Checkout'
+import CheckoutSuccess from '../pages/Checkout/CheckoutSuccess'
+import UserProfile from '../pages/User/UserProfile'
 
 const Router = () => {
   const { pathname } = useLocation()
@@ -40,7 +42,9 @@ const Router = () => {
       path: '/calendar',
       element: <UserCalendar userId={store?.user._id} userRoles={store?.user.roles}/>
     },
+    { id: 'userProfilePage', path: '/profile', element: <UserProfile user={store?.user} /> },
     { id: 'checkoutPage', path: '/checkout', element: <Checkout /> },
+    { id: 'checkoutSuccessPage', path: '/checkout/success', element: <CheckoutSuccess /> },
     { id: 'notFoundPage', path: '*', element: <NotFoundPage/> }
   ]
 
