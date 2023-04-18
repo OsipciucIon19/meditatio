@@ -1,0 +1,21 @@
+{
+  "subject": "Matematica",
+  "grade": "4",
+  "paragraphs": [
+    {
+      "index": 1,
+      "title": "Primul capitol",
+      "lessons": [
+        {
+          "title": "1. Evocare prin exerciții și probleme",
+          "content": "<div> <p>Initiere</p> <ol> <li> <div>1 Numara:</div> <div> <ol> <li> din 1 in 1, de la 468 pana la 472; </li> <li> din 2 in 2, de la 594 pana la 610; </li> <li> din 5 in 5 de la 900 pana la 950; </li> <li> din 10 in 10, de la 820 pana la 700; </li> <li> din 50 in 50, de la 1000 pana la 500. </li> </ol> </div> </li> <li> <div> 2 Alege un personaj si precizeaza, dupa modelul din exercitiul 1: <ul> <li>in ce ordine numara;</li> <li>din cat in cat;</li> <li>de la ce numar pana la ce numar;</li> </ul> Continua cu urmatoarele patru numere </div> <div> <img src=\"\" alt=\"cap-1-lect-1-ex-2\"> </div> </li> <li> <div>3 Fii istet si calculeaza in minte raspunsurile exercitiilor din fiecare coloana</div> <div> <div style=\"width: 16%\"> 425 + 3 425 + 33 425 + 333 </div> <div style=\"width: 16%\"> 5 + 445 55 + 445 555 + 445 </div> <div style=\"width: 16%\"> 978 - 4 978 - 44 978 - 444 </div> <div style=\"width: 16%\"> 800 - 2 800 - 22 800 - 222 </div> <div style=\"width: 16%\"> 30 x 2 34 x 2 134 x 2 </div> <div style=\"width: 16%\"> 60 : 3 69 : 3 690 : 3 </div> </div> </li> <li> <div>4 Completeaza problemele conform cerintelor.</div> <div>Calculeaza oral si formuleaza raspunsurile depline.</div> <div> <div>a) Vara, Ana a citit romanul \"Coliba unchiului Tom\". Volumul intai are 256 de pagini, iar volumul al doilea 294 de pagini.</div> <div>Formuleaza o intrevare astfel incat problema sa se rezolve:</div> <ol> <li>prin adunare;</li> <li>prin scadere.</li> </ol> </div> <div> <div>b) La o tabara s-au odihnit 242 de fete, iar baieti...</div> <div>Continua problema astfel incat sa se rezolve prin exercitiul:</div> <ol> <li>242 x 2 = ?</li> <li>242 : 2 = ?</li> <li>242 + 242 x 2 = ?</li> <li>242 - 242 : 2 = ?</li> </ol> </div> </li> </ol></div>"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "Al doilea capitol",
+      "content": "<div>Acesta este al doilea capitol</div>"
+    }
+  ]
+}

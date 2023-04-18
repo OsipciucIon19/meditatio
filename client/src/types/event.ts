@@ -8,4 +8,5 @@ export interface Event {
   end: string
   status?: string
   color?: string
+  content?: string
 }

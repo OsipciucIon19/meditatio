@@ -48,6 +48,33 @@ class EventController {
       next(err)
     }
   }
+
+  async accessEvent(req: Request, res: Response, next: NextFunction) {
+    try {
+      const parsedUrl = url.parse(req.url)
+      const userId = new URLSearchParams(parsedUrl.query).get('user')
+      const eventContent = await eventService.accessEventById(req.params.id, userId)
+
+      return res.json(eventContent)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  async getEventFromCalendar(req: Request, res: Response, next: NextFunction) {
+    try {
+      const parsedUrl = url.parse(req.url)
+      const userId = new URLSearchParams(parsedUrl.query).get('user')
+      const userRoles = new URLSearchParams(parsedUrl.query).getAll('roles[]')
+      const eventStart = new URLSearchParams(parsedUrl.query).get('start')
+
+      const event = await eventService.getEventByUserInfo(userId, userRoles, new Date(eventStart))
+
+      return res.json(event)
+    } catch (err) {
+      next(err)
+    }
+  }
 }
 
 module.exports = new EventController()

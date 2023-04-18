@@ -9,6 +9,7 @@ export default class Store {
   user = {} as User
   isAuth = false
   isLoading = false
+  isFullWidthPage = false
 
   constructor() {
     makeAutoObservable(this)
@@ -24,6 +25,10 @@ export default class Store {
 
   setLoading(bool: boolean) {
     this.isLoading = bool
+  }
+
+  setIsFullWidthPage(bool: boolean) {
+    this.isFullWidthPage = bool
   }
 
   async login(email: string, password: string) {

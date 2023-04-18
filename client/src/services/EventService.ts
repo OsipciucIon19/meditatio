@@ -10,4 +10,22 @@ export default class EventService {
       }
     })
   }
+
+  static fetchEventContent(eventId:string, userId: string): Promise<AxiosResponse<Event>> {
+    return $api.get<Event>(`/access-event/${eventId}`, {
+      params: {
+        user: userId
+      }
+    })
+  }
+
+  static fetchEventByStartDateAndUserId(userId:string, userRoles: Array<string>, eventStart: string): Promise<AxiosResponse<Event>> {
+    return $api.get<Event>('/get-event-from-calendar', {
+      params: {
+        user: userId,
+        roles: userRoles,
+        start: eventStart
+      }
+    })
+  }
 }

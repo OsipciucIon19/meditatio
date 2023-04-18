@@ -27,6 +27,8 @@ router.get('/courses/:id', courseController.getCourseById)
 router.get('/get-user-events/:id', eventController.getUserEvents)
 router.post('/add-user-event', eventController.addUserEvent)
 router.post('/add-user-events', eventController.addUserEvents)
+router.get('/access-event/:id', eventController.accessEvent)
+router.get('/get-event-from-calendar', eventController.getEventFromCalendar)
 
 router.get('/subjects', subjectController.getSubjects)
 

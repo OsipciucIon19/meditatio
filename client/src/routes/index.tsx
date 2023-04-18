@@ -15,13 +15,20 @@ import { Context } from 'App'
 import Checkout from '../pages/Checkout/Checkout'
 import CheckoutSuccess from '../pages/Checkout/CheckoutSuccess'
 import UserProfile from '../pages/User/UserProfile'
+import Lesson from '../pages/Lesson/Lesson'
+import { ProSidebarProvider } from 'react-pro-sidebar'
 
-const Router = () => {
+const Index = () => {
   const { pathname } = useLocation()
   const { store } = useContext(Context)
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    if (pathname.includes('lesson')) {
+      store.setIsFullWidthPage(true)
+    } else {
+      store.setIsFullWidthPage(false)
+    }
   }, [pathname])
 
   const routeList = [
@@ -42,20 +49,27 @@ const Router = () => {
       path: '/calendar',
       element: <UserCalendar userId={store?.user._id} userRoles={store?.user.roles}/>
     },
-    { id: 'userProfilePage', path: '/profile', element: <UserProfile user={store?.user} /> },
-    { id: 'checkoutPage', path: '/checkout', element: <Checkout /> },
-    { id: 'checkoutSuccessPage', path: '/checkout/success', element: <CheckoutSuccess /> },
-    { id: 'notFoundPage', path: '*', element: <NotFoundPage/> }
+    { id: 'userProfilePage', path: '/profile', element: <UserProfile user={store?.user}/> },
+    { id: 'checkoutPage', path: '/checkout', element: <Checkout/> },
+    { id: 'checkoutSuccessPage', path: '/checkout/success', element: <CheckoutSuccess/> },
+    { id: 'notFoundPage', path: '*', element: <NotFoundPage/> },
+    { id: 'lessonPage', path: '/lesson/:id', element: <ProSidebarProvider><Lesson /></ProSidebarProvider> }
   ]
 
   return (
-    <Routes>
-      {
-        routeList.map(({ id, path, element }) =>
-          <Route key={id} path={path} element={element}/>)
-      }
-    </Routes>
+    <div
+      className={`${!store.isFullWidthPage ? 'container' : ''} position-relative`}
+      style={store.isFullWidthPage ? { height: 'calc(100vh - 162px)' } :
+        { minHeight: 'calc(100vh - 498px)', margin: '2rem auto' }}
+    >
+      <Routes>
+        {
+          routeList.map(({ id, path, element }) =>
+            <Route key={id} path={path} element={element}/>)
+        }
+      </Routes>
+    </div>
   )
 }
 
-export default observer(Router)
+export default observer(Index)

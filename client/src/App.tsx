@@ -23,12 +23,7 @@ const App: FC = () => {
       store
     }}>
       <NavigationBar />
-      <div
-        className="container position-relative"
-        style={{ minHeight: 'calc(100vh - 498px)', margin: '2rem auto' }}
-      >
-        <Router />
-      </div>
+      <Router />
       <Footer />
     </Context.Provider>
   )

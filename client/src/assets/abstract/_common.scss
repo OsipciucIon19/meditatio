@@ -70,6 +70,10 @@ $theme-colors: (
   transition: 0.5s linear;
 }
 
+#root {
+  overflow: hidden;
+}
+
 // Common styles
 a {
   color: #000;
@@ -130,7 +134,7 @@ input {
   color: $dark-gray-brand-color;
   font-family: $brand-font;
   font-weight: 500;
-  font-size: 30pt;
+  font-size: 22pt;
   text-decoration: none;
 
   &:hover {

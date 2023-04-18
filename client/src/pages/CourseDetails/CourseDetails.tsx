@@ -33,7 +33,7 @@ const CourseDetails: FC = () => {
         courseError.length ?
           <NotFoundPage/> :
           <div>
-            <h1>{`${course?.subject?.title} cl ${course?.subject?.grade}`}</h1>
+            <h1>{`${course?.subject?.title} clasa ${course?.subject?.grade}`}</h1>
             <div>{course?.price} lei per ora</div>
             <div>
               { course?.teachers.map(teacher =>
