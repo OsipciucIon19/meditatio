@@ -38,6 +38,14 @@ io.on('connection', (socket) => {
   socket.on('mouse-position', (data) => {
     socket.broadcast.emit('receive-mouse-position', data)
   })
+
+  socket.on('toggle-notebook', (data) => {
+    socket.broadcast.emit('receive-toggle-notebook', data)
+  })
+
+  socket.on('write-to-notebook', (data) => {
+    socket.broadcast.emit('receive-write-to-notebook', data)
+  })
 })
 
 const start = async () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sidebar'
 import { Button } from 'reactstrap'
-import { RxHamburgerMenu } from 'react-icons/all'
+import { RxHamburgerMenu, TbTriangleFilled } from 'react-icons/all'
 import { StyledLesson } from './Lesson.styled'
 import { useLocation } from 'react-router-dom'
 import { convertToRomanNumber } from '../../utils/events'
@@ -15,7 +15,9 @@ const Lesson = () => {
   const { eventContent } = state
   const [activeTab, setActiveTab] = useState({ paragraph: 1, lesson: 1 })
   const mainSection = useRef(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [mousePosition, setMousePosition] = useState({ x: 9999, y: 9999 })
+  const [isNoteBookOpened, setIsNoteBookOpened] = useState(false)
+  const [notebookInput, setNotebookInput] = useState('')
 
   useEffect(() => {
     socket?.on('receive-lesson', (data) => {
@@ -25,6 +27,14 @@ const Lesson = () => {
 
     socket?.on('receive-mouse-position', (data) => {
       setMousePosition(data)
+    })
+
+    socket?.on('receive-toggle-notebook', (data) => {
+      setIsNoteBookOpened(data)
+    })
+
+    socket?.on('receive-write-to-notebook', (data) => {
+      setNotebookInput(data)
     })
   }, [socket])
 
@@ -46,8 +56,17 @@ const Lesson = () => {
   const changeTab = (activeTab) => {
     mainSection.current.scrollTop = 0
     setActiveTab(activeTab)
-    console.log(socket)
     socket?.emit('select-lesson', activeTab)
+  }
+
+  const toggleNotebook = () => {
+    socket?.emit('toggle-notebook', !isNoteBookOpened)
+    setIsNoteBookOpened(prevState => !prevState)
+  }
+
+  const handleNotebookInput = (value) => {
+    socket?.emit('write-to-notebook', value)
+    setNotebookInput(value)
   }
 
   return (
@@ -83,6 +102,19 @@ const Lesson = () => {
           __html: eventContent?.content?.paragraphs[activeTab.paragraph - 1]?.lessons[activeTab.lesson - 1]?.content
         }}
       />
+      <div className="notebook" style={{ top: isNoteBookOpened ? '70%' : '95%' }}>
+        <span
+          className="notebook__button"
+          onClick={() => toggleNotebook()}
+        >
+          <TbTriangleFilled style={{ transform: isNoteBookOpened ? 'rotate(180deg)' : 'rotate(0)' }}/> Maculator
+        </span>
+        <pre><textarea
+          rows={50}
+          value={notebookInput}
+          onChange={(e) => handleNotebookInput(e.target.value)}
+        ></textarea></pre>
+      </div>
       <div
         className="cursor"
         style={{

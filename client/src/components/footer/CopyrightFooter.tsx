@@ -6,7 +6,7 @@ const CopyrightFooter: FC = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <div className="copyright-footer py-2">
+    <div className="copyright-footer py-2" style={{ position: 'relative', zIndex: '5' }}>
       <Container>
         <Row className="py-1 align-items-center">
           <Col>
