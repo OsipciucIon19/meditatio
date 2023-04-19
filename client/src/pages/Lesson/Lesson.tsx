@@ -22,6 +22,7 @@ const Lesson = () => {
   useEffect(() => {
     socket?.on('receive-lesson', (data) => {
       mainSection.current.scrollTop = 0
+      console.log(mainSection)
       setActiveTab(data)
     })
 

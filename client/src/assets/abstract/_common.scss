@@ -72,6 +72,7 @@ $theme-colors: (
 
 #root {
   overflow: hidden;
+  margin-top: 98px;
 }
 
 // Common styles
@@ -161,6 +162,11 @@ input {
   }
 }
 
+.navbar-text {
+  display: flex!important;
+  align-items: center;
+}
+
 .dropdown-header {
   font-size: 12pt !important;
 }
@@ -175,6 +181,13 @@ input {
   &:active {
     background-color: $primary-color !important;
   }
+}
+
+.language-button img {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  width: 36px;
+  border-radius: 20px;
 }
 
 footer {

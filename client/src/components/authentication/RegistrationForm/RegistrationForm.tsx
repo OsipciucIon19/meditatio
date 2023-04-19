@@ -3,8 +3,9 @@ import { Context } from 'App'
 import { observer } from 'mobx-react-lite'
 import { Input, Button, Spinner, Form, Label, ButtonGroup } from 'reactstrap'
 import { useTitle } from 'hooks/useTitle'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { StyledRegistrationForm } from './RegistrationForm.styled'
+import { useTranslation } from 'react-i18next'
 
 const LoginForm: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -14,8 +15,8 @@ const LoginForm: FC = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const { store } = useContext(Context)
-  const location = useLocation()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   useTitle('Înregistrare')
 
@@ -31,20 +32,28 @@ const LoginForm: FC = () => {
 
   useEffect(() => {
     if (store.isAuth) {
-      return navigate('/profile')
+      navigate('/profile')
+    }
+
+    return () => {
+      setFirstName(null)
+      setLastName(null)
+      setEmail(null)
+      setPassword(null)
+      setPhoneNumber(null)
     }
   }, [store.isAuth, navigate])
 
   return (
     <StyledRegistrationForm className="blurry-bg">
       <div className="registration">
-        <h1 className="registration__title">Înregistrare</h1>
+        <h1 className="registration__title">{t('register-title')}</h1>
         <Form
           className="registration__form"
           onSubmit={handleSubmit}
         >
           <Label for="firstName">
-            Numele
+            {t('first-name')}
           </Label>
           <Input
             id="firstName"
@@ -55,7 +64,7 @@ const LoginForm: FC = () => {
             placeholder="Ionescu"
           />
           <Label for="lastName">
-            Prenumele
+            {t('last-name')}
           </Label>
           <Input
             id="lastName"
@@ -66,7 +75,7 @@ const LoginForm: FC = () => {
             placeholder="Ion"
           />
           <Label for="email">
-            Email
+            {t('email')}
           </Label>
           <Input
             id="email"
@@ -77,7 +86,7 @@ const LoginForm: FC = () => {
             placeholder="ion.ionescu@mail.md"
           />
           <Label for="phoneNumber">
-            Numarul de telefon
+            {t('phone-number')}
           </Label>
           <Input
             id="phoneNumber"
@@ -88,7 +97,7 @@ const LoginForm: FC = () => {
             placeholder="+373 60 000 000"
           />
           <Label for="password">
-            Parolă
+            {t('password')}
           </Label>
           <Input
             id="password"
@@ -96,6 +105,7 @@ const LoginForm: FC = () => {
             name="password"
             value={password}
             type="password"
+            autoComplete="on"
             placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
           />
           <ButtonGroup className="float-end align-items-center">
@@ -109,11 +119,11 @@ const LoginForm: FC = () => {
               {
                 isLoading ?
                   <Spinner className="mx-2" size="sm" color="light" /> :
-                  'Înainte'
+                  t('submit')
               }
             </Button>
             <span style={{ margin: '1rem' }}>
-                            Ai deja un cont? <Link to="/login">Loghează-te</Link>
+              {t('have-an-account')} <Link to="/login">{t('link-login-2')}</Link>
             </span>
           </ButtonGroup>
         </Form>

@@ -9,15 +9,16 @@ import { useFetching } from '../../hooks/useFetching'
 import CourseService from '../../services/CourseService'
 import Loader from '../../components/ui/Loader/Loader'
 import CallToAction from '../../components/cta/CallToAction'
+import { useTranslation } from 'react-i18next'
 
 const Home: FC = () => {
+  const { t } = useTranslation()
+  
   const heroData = {
-    title: 'Hai să studiem de aici împreună!',
+    title: t('hero-title'),
     image: image,
-    body: <><p>Platforma ta completă pentru a obține meditații și a studia orele
-      preferate.</p>
-    <p><i>* Completează câmpul liber de mai jos cu poșta ta electronică pentru a putea urma procedura de
-        înregistrare.</i></p></>
+    body: <><p>{t('main-hero-1-paragraph')}</p>
+      <p><i>{t('main-hero-2-paragraph')}</i></p></>
   }
   const [courses, setCourses] = useState<Course[]>([])
   const [fetchCourses, areCoursesLoading, courseError] = useFetching(async (limit, page): Promise<void> => {
@@ -28,12 +29,11 @@ const Home: FC = () => {
 
   const callToActionList = [
     {
-      title: 'Vrei să te alături echipei noastre de profesori?',
+      title: t('become-a-teacher-cta-title'),
       image: teacherImage,
-      body: <p>Poți deveni profesor la meditat.io prin completarea unui formular simplu, urmând pe link-ul de mai
-        jos</p>,
+      body: <p>{t('become-a-teacher-cta-description')}</p>,
       inverted: true,
-      link: { to: '/become-a-teacher', text: 'Completează formularul' }
+      link: { to: '/become-a-teacher', text: t('become-a-teacher-cta-button-title') }
     }
   ]
 
@@ -42,6 +42,10 @@ const Home: FC = () => {
       await fetchCourses(3, 1)
     }
     fetchData().catch(console.error)
+
+    return () => {
+      setCourses(null)
+    }
   }, [])
 
   useTitle('Pagina Principală')
@@ -55,7 +59,7 @@ const Home: FC = () => {
         hasForm={true}
       />
       <section>
-        <h2 className="text-center">Descopera cele mai interesante cursuri!</h2>
+        <h2 className="text-center">{t('courses-cta-title')}</h2>
         <hr/>
         {areCoursesLoading && <Loader/>}
         {

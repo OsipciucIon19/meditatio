@@ -11,9 +11,9 @@ export const StyledLesson = styled.div`
 
   .content-section {
     overflow: overlay;
+    padding: 2rem 400px;
     width: 100%;
     margin: 0;
-    padding: 2rem;
     scroll-behavior: smooth;
     
     .ex-nr {
@@ -27,6 +27,11 @@ export const StyledLesson = styled.div`
     
     .ordered-list > li {
       list-style: lower-alpha;
+    }
+    
+    img {
+      object-fit: contain;
+      width: 100%;
     }
   }
 
@@ -56,6 +61,7 @@ export const StyledLesson = styled.div`
     width: 100%;
     z-index: 3;
     cursor: pointer;
+    transition: all 0.5s ease-in-out;
 
     &__button {
       display: block;
@@ -65,6 +71,10 @@ export const StyledLesson = styled.div`
       color: white;
       background: #646464;
       border-radius: 10px 10px 0 0;
+      
+      svg {
+        transition: transform 0.2s ease-in-out 0s;
+      }
     }
 
     textarea {
@@ -73,6 +83,18 @@ export const StyledLesson = styled.div`
       border: 0;
       padding: 0.5rem;
       color: white;
+    }
+  }
+  
+  @media (max-width: 1600px) {
+    .content-section {
+      padding: 2rem 200px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .content-section {
+      padding: 2rem 0.5rem;
     }
   }
 `

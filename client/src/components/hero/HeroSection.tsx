@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import { useNavigate } from 'react-router-dom'
 import { Context } from 'App'
+import { useTranslation } from 'react-i18next'
 
 type HeroSectionProps = {
     inverted?: boolean,
@@ -16,6 +17,7 @@ type HeroSectionProps = {
 
 const HeroSection: FC<HeroSectionProps> = ({ inverted, title, image, body, hasForm }) => {
   const { store } = useContext(Context)
+  const { t } = useTranslation()
   const [email, setEmail] = useState<string>('')
   const rowDirection = inverted ? 'row-reverse' : 'row'
   const navigate = useNavigate()
@@ -50,7 +52,7 @@ const HeroSection: FC<HeroSectionProps> = ({ inverted, title, image, body, hasFo
                 disabled={store.isAuth}
                 type="submit"
                 onClick={() => navigate('/registration', { state: { email } })}
-              >Obține un cont</Button>
+              >{t('link-register')}</Button>
             </Form>
           }
         </Col>

@@ -6,6 +6,7 @@ import { Course } from '../../types/course'
 import TimeInput from '../ui/TimeInput/TimeInput'
 import { User } from '../../types/user'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 type ScheduleModalProps = {
   modal: boolean
@@ -24,6 +25,7 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
   const [toEventMinutes, setToEventMinutes] = useState<number>(0)
   const [fromEventMinutes, setFromEventMinutes] = useState<number>(0)
   const [daysAmountSelected, setDaysAmountSelected] = useState('single')
+  const { t } = useTranslation()
   const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie',
     'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'
   ]
@@ -94,7 +96,7 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
       <ModalBody>
         <Localization date={new DateLocalizer({ culture: 'ro', firstOfWeek: 1 })}>
           <Form>
-            <div>Title: {course?.subject.title} clasa {course?.subject.grade}</div>
+            <div>Title: {course?.subject.title} {t('courses-class')} {course?.subject.grade}</div>
             <div>course id: {course?._id}</div>
             <div>teacher id: {teacher?._id}</div>
             <div>student id: {studentId}</div>

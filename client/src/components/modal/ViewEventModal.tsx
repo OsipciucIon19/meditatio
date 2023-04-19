@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Spinner } from 'reactstrap'
 import { Event } from '../../types/event'
 import Loader from '../ui/Loader/Loader'
@@ -16,14 +16,25 @@ type ViewEventModalProps = {
 
 const ViewEventModal: FC<ViewEventModalProps> = (props) => {
   const { modal, toggle, event, isEventLoading, userId } = props
+  const [eventContent, setEventContent] = useState(null)
   const navigate = useNavigate()
   const [fetchEventContent, isEventContentLoading] = useFetching(async (eventId, userId): Promise<void> => {
     const response = await EventService.fetchEventContent(eventId, userId)
-    navigate(`/lesson/${eventId}`, { state: { eventContent: response.data } })
+    setEventContent(response.data)
   })
   const handleAccessLessonButton = async () => {
     await fetchEventContent(event?._id, userId)
   }
+
+  useEffect(() => {
+    if (eventContent) {
+      navigate(`/lesson/${eventContent?._id}`, { state: { eventContent } })
+    }
+
+    return () => {
+      setEventContent(null)
+    }
+  }, [eventContent])
 
   return (
     <Modal isOpen={modal} toggle={toggle}>

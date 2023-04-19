@@ -50,6 +50,7 @@ const Calendar: FC<CalendarProps> = ({ events, isEditable = false, course, stude
 
     return () => {
       window.onresize = null
+      setSelectedEvent(null)
     }
   }, [])
 

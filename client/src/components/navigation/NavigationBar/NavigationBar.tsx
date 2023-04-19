@@ -17,6 +17,7 @@ import {
 import { Context } from 'App'
 import { observer } from 'mobx-react-lite'
 import { RxHamburgerMenu } from 'react-icons/all'
+import { useTranslation } from 'react-i18next'
 
 const NavigationBar: FC = () => {
   const { store } = useContext(Context)
@@ -26,12 +27,14 @@ const NavigationBar: FC = () => {
   const [url, setUrl] = useState<string>('')
   const toggleNavbar = () => setIsNavbarOpen(!isNavbarOpen)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [currentLanguage, setCurrentLanguage] = useState('fr')
+  const { t, i18n } = useTranslation()
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen)
 
   const listLinks = [
-    { title: 'Cursuri', path: 'courses' },
-    { title: 'Prețuri', path: 'prices' },
-    { title: 'Despre noi', path: 'about-us' }
+    { title: t('link-courses'), path: 'courses' },
+    { title: t('link-prices'), path: 'prices' },
+    { title: t('link-about-us'), path: 'about-us' }
   ]
 
   useEffect(() => {
@@ -42,8 +45,13 @@ const NavigationBar: FC = () => {
     setIsNavbarOpen(false)
   }, [store, location])
 
+  const changeLanguage = (language) => {
+    setCurrentLanguage(language)
+    i18n.changeLanguage(language)
+  }
+
   return (
-    <Navbar className="blurry-bg" sticky="top" expand="md" data-testid="NavigationBar">
+    <Navbar className="blurry-bg fixed-top" expand="md" data-testid="NavigationBar">
       <Link
         className="navbar-brand" to="/">
         <img className="logo-image" src={logo} alt="logo" width="70" height="70"/>
@@ -100,21 +108,28 @@ const NavigationBar: FC = () => {
                 color="danger"
                 onClick={async () => {
                   await store.logout()
-                  return navigate('/')
+                  navigate('/')
                 }}
               >
-                Deloghează-te
+                {t('link-logout')}
               </Button>
             </div> :
             <div className="unauthorized-buttons">
               <Link to="login" className="btn btn-secondary">
-                Intră în cont
+                {t('link-login')}
               </Link>
               <Link to="registration" style={{ color: '#000', margin: '0.3rem' }}>
-                Obține un cont
+                {t('link-register')}
               </Link>
             </div>
           }
+          <div className="language-button">
+            {
+              currentLanguage === 'fr' ?
+                <img src="/images/flags/fr.svg" alt="France Flag" onClick={() => changeLanguage('ro')} /> :
+                <img src="/images/flags/md.svg" alt="Moldova Flag" onClick={() => changeLanguage('fr')} />
+            }
+          </div>
         </NavbarText>
       </Collapse>
     </Navbar>

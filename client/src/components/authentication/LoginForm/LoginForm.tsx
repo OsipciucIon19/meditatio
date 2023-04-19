@@ -5,6 +5,7 @@ import { Input, Button, Spinner, Form, Label, ButtonGroup } from 'reactstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTitle } from 'hooks/useTitle'
 import { StyledLoginForm } from './LoginForm.styled'
+import { useTranslation } from 'react-i18next'
 
 const LoginForm: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -12,12 +13,18 @@ const LoginForm: FC = () => {
   const [password, setPassword] = useState<string>('')
   const { store } = useContext(Context)
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   useTitle('Autentificare')
 
   useEffect(() => {
     if (store.isAuth) {
-      return navigate('/profile')
+      navigate('/profile')
+    }
+
+    return () => {
+      setEmail(null)
+      setPassword(null)
     }
   }, [store.isAuth, navigate])
 
@@ -34,13 +41,13 @@ const LoginForm: FC = () => {
   return (
     <StyledLoginForm className="blurry-bg">
       <div className="auth">
-        <h1 className="auth__title">Autentificare</h1>
+        <h1 className="auth__title">{t('auth-title')}</h1>
         <Form
           className="auth__form"
           onSubmit={handleSubmit}
         >
           <Label for="email">
-            Email
+            {t('email')}
           </Label>
           <Input
             id="email"
@@ -51,7 +58,7 @@ const LoginForm: FC = () => {
             placeholder="ion.ionescu@mail.md"
           />
           <Label for="password">
-            Parolă
+            {t('password')}
           </Label>
           <Input
             id="password"
@@ -59,6 +66,7 @@ const LoginForm: FC = () => {
             name="password"
             value={password}
             type="password"
+            autoComplete="on"
             placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
           />
           <ButtonGroup className="float-end align-items-center">
@@ -72,11 +80,11 @@ const LoginForm: FC = () => {
               {
                 isLoading ?
                   <Spinner className="mx-2" size="sm" color="light"/> :
-                  'Înainte'
+                  t('submit')
               }
             </Button>
             <span style={{ margin: '1rem' }}>
-                        Încă nu ai un cont? <Link to="/registration">Înregistrează-te</Link>
+              {t('do-not-have-an-account')} <Link to="/registration">{t('link-register-2')}</Link>
             </span>
           </ButtonGroup>
         </Form>

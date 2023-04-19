@@ -60,7 +60,7 @@ const Index = () => {
     <div
       className={`${!store.isFullWidthPage ? 'container' : ''} position-relative`}
       style={store.isFullWidthPage ? { height: 'calc(100vh - 162px)' } :
-        { minHeight: 'calc(100vh - 498px)', margin: '2rem auto' }}
+        { minHeight: 'calc(100vh - 522px)', margin: '2rem auto' }}
     >
       <Routes>
         {

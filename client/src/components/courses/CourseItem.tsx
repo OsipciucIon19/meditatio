@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import { useTranslation } from 'react-i18next'
 
 const CourseItem = (props: any) => {
   const [areDetailsShown, setAreDetailsShown] = useState(false)
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <div
@@ -22,7 +24,7 @@ const CourseItem = (props: any) => {
           {props.course.subject.title}
         </h3>
         <h4 className="course-card__content__grade">
-          clasa <span className="grade-value">{props.course.subject.grade}</span>
+          {t('courses-class')} <span className="grade-value">{props.course.subject.grade}</span>
         </h4>
         <div
           className={`course-card__content__additional-info ${areDetailsShown ? 'active' : 'inactive'}`}
@@ -36,7 +38,7 @@ const CourseItem = (props: any) => {
               () => navigate(`/courses/${props.course._id}`)
             }
           >
-            Vezi Detalii
+            {t('courses-see-details')}
           </Button>
         </div>
       </div>

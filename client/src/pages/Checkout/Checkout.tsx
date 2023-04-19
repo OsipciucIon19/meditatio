@@ -15,6 +15,10 @@ const Checkout: FC = () => {
     setEvent({
       ...eventInfo
     })
+
+    return () => {
+      setEvent({})
+    }
   }, [])
 
   const paymentToken = async (token) => {
@@ -66,7 +70,7 @@ const Checkout: FC = () => {
         name="Pay with credit card"
         billingAddress
         shippingAddress
-        amount={event?.amount}
+        amount={parseInt(event?.amount)}
         token={paymentToken}
       >
         <Button>Pay</Button>
