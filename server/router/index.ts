@@ -19,6 +19,7 @@ router.post('/logout', userController.logout)
 router.get('/activate/:link', userController.activate)
 router.get('/refresh', userController.refresh)
 router.get('/users', roleMiddleware([constants.ROLE_ADMIN]), userController.getUsers)
+router.get('/user/:id', userController.getUser)
 
 router.get('/courses', courseController.getCourses)
 router.get('/courses/:id', courseController.getCourseById)

@@ -5,6 +5,8 @@ import Loader from '../ui/Loader/Loader'
 import { useFetching } from '../../hooks/useFetching'
 import EventService from '../../services/EventService'
 import { useNavigate } from 'react-router-dom'
+import { monthNames } from 'utils/events'
+import { useTranslation } from 'react-i18next'
 
 type ViewEventModalProps = {
   modal: boolean
@@ -18,6 +20,7 @@ const ViewEventModal: FC<ViewEventModalProps> = (props) => {
   const { modal, toggle, event, isEventLoading, userId } = props
   const [eventContent, setEventContent] = useState(null)
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [fetchEventContent, isEventContentLoading] = useFetching(async (eventId, userId): Promise<void> => {
     const response = await EventService.fetchEventContent(eventId, userId)
     setEventContent(response.data)
@@ -38,20 +41,25 @@ const ViewEventModal: FC<ViewEventModalProps> = (props) => {
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader>Vizualizare detalii lectie</ModalHeader>
+      <ModalHeader>{t('view-lesson-details')}</ModalHeader>
       <ModalBody>
         {
-          isEventLoading ? <Loader /> : 'Event id: ' + event?._id
+          isEventLoading ? <Loader /> :
+            <>
+              <p className="mx-auto my-2">
+                <b>{new Date(event?.start).getDate()} {monthNames[new Date(event?.start).getMonth()]}</b>
+              </p>
+            </>
         }
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={() => handleAccessLessonButton() }>
-          {isEventContentLoading ? <Spinner className="mx-2" size="sm" color="light" /> : 'Accesează lecția'}
+          {isEventContentLoading ? <Spinner className="mx-2" size="sm" color="light" /> : t('access-lesson')}
         </Button>
         <Button color="danger" onClick={(e: React.KeyboardEvent<any> & React.MouseEvent<any, MouseEvent>) => {
           toggle(e)
         }}>
-          Cancel
+          {t('cancel')}
         </Button>
       </ModalFooter>
     </Modal>

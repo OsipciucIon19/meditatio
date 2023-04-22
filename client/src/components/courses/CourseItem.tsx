@@ -29,9 +29,12 @@ const CourseItem = (props: any) => {
         <div
           className={`course-card__content__additional-info ${areDetailsShown ? 'active' : 'inactive'}`}
         >
-          <p className="course-card__content__additional-info__description">
-            {props.course.description}
-          </p>
+          <p
+            className="course-card__content__additional-info__description"
+            dangerouslySetInnerHTML={{
+              __html: props.course.description.length > 100 ? props.course.description.substring(0, 100) + '...' : props.course.description
+            }}
+          />
           <Button
             className="course-card__content__additional-info__button"
             onClick={

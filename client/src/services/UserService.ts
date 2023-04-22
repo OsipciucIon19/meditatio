@@ -6,4 +6,8 @@ export default class UserService {
   static fetchUsers(): Promise<AxiosResponse<User[]>> {
     return $api.get<User[]>('/users')
   }
+
+  static fetchOneUser(userId): Promise<AxiosResponse<User>> {
+    return $api.get<User>(`/user/${userId}`)
+  }
 }

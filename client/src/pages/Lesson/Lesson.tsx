@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 import { convertToRomanNumber } from '../../utils/events'
 import { io } from 'socket.io-client'
 
-const socket = io('http://localhost:5000')
+const socket = io(process.env.REACT_APP_API_URL)
 
 const Lesson = () => {
   const { collapseSidebar } = useProSidebar()

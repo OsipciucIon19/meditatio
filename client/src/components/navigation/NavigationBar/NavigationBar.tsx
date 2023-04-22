@@ -18,6 +18,7 @@ import { Context } from 'App'
 import { observer } from 'mobx-react-lite'
 import { RxHamburgerMenu } from 'react-icons/all'
 import { useTranslation } from 'react-i18next'
+import Cookies from 'js-cookie'
 
 const NavigationBar: FC = () => {
   const { store } = useContext(Context)
@@ -27,7 +28,7 @@ const NavigationBar: FC = () => {
   const [url, setUrl] = useState<string>('')
   const toggleNavbar = () => setIsNavbarOpen(!isNavbarOpen)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [currentLanguage, setCurrentLanguage] = useState('fr')
+  const [currentLanguage, setCurrentLanguage] = useState(Cookies.get('i18next'))
   const { t, i18n } = useTranslation()
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen)
 
@@ -94,13 +95,13 @@ const NavigationBar: FC = () => {
                     tag={Link}
                     to="profile"
                   >
-                    Cabinet Personal
+                    {t('user-account-2')}
                   </DropdownItem>
                   <DropdownItem
                     tag={Link}
                     to="calendar"
                   >
-                    Calendar
+                    {t('user-calendar-2')}
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>

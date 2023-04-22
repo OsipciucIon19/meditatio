@@ -7,6 +7,7 @@ import TimeInput from '../ui/TimeInput/TimeInput'
 import { User } from '../../types/user'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { monthNames } from 'utils/events'
 
 type ScheduleModalProps = {
   modal: boolean
@@ -26,9 +27,6 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
   const [fromEventMinutes, setFromEventMinutes] = useState<number>(0)
   const [daysAmountSelected, setDaysAmountSelected] = useState('single')
   const { t } = useTranslation()
-  const monthNames = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie',
-    'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'
-  ]
   const days = ['Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sa', 'Du']
 
   const handleChange = (time, isHourFormat, isFromInput) => {
@@ -92,18 +90,28 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader>Add event</ModalHeader>
+      <ModalHeader>{t('schedule-a-lesson')}</ModalHeader>
       <ModalBody>
         <Localization date={new DateLocalizer({ culture: 'ro', firstOfWeek: 1 })}>
           <Form>
-            <div>Title: {course?.subject.title} {t('courses-class')} {course?.subject.grade}</div>
-            <div>course id: {course?._id}</div>
-            <div>teacher id: {teacher?._id}</div>
-            <div>student id: {studentId}</div>
+            <div className="my-1">
+              <b>{t('chosen-course')}:</b> {course?.subject.title} {t('courses-class')} {course?.subject.grade}
+            </div>
+            <div className="my-1"><b>{t('price-per-hour')}:</b> {course?.price} lei</div>
+            <div className="my-1"><b>{t('chosen-teacher')}:</b>
+              <div className="my-1">
+                <img
+                  className="mr-2"
+                  src={`https://ui-avatars.com/api/?name=${teacher?.firstName}+${teacher?.lastName}&size=40`}
+                  alt="avatar"
+                  style={{ borderRadius: '25px' }}
+                />{teacher?.firstName} {teacher?.lastName}
+              </div>
+            </div>
             <hr/>
             <div className="d-flex align-items-center mb-3">
               <label className="me-4" htmlFor="daysAmount">
-                Programează:
+                {t('schedule')}:
               </label>
               <Input
                 type="select"
@@ -112,8 +120,8 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
                 value={daysAmountSelected}
                 onChange={handleSelectChange}
               >
-                <option value="single">o singură lecție</option>
-                <option value="multiple">mai multe lecții</option>
+                <option value="single">{t('one-lesson')}</option>
+                <option value="multiple">{t('multiple-lessons')}</option>
               </Input>
             </div>
             {daysAmountSelected === 'single' && singleSelectedElements}
@@ -121,7 +129,7 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
             <div className="d-flex">
               <div className="d-flex align-items-center">
                 <label className="w-25 me-2">
-                  De la:
+                  {t('from')}:
                 </label>
                 <div className="d-flex align-items-center">
                   <TimeInput
@@ -141,7 +149,7 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
               </div>
               <div className="d-flex align-items-center me-2">
                 <label className="w-50 ms-4">
-                  Până la:
+                  {t('to')}:
                 </label>
                 <div className="d-flex align-items-center">
                   <TimeInput
@@ -164,14 +172,14 @@ const ScheduleModal: FC<ScheduleModalProps> = (props) => {
         </Localization>
       </ModalBody>
       <ModalFooter>
-        <div><i>Total: {course?.price} lei</i></div>
+        <div><i>{t('total')}: {course?.price} lei</i></div>
         <Button color="primary" onClick={() => handlePaymentClick()}>
-          Continuă spre plată
+          {t('review')}
         </Button>
         <Button color="danger" onClick={(e: React.KeyboardEvent<any> & React.MouseEvent<any, MouseEvent>) => {
           toggle(e)
         }}>
-          Cancel
+          {t('cancel')}
         </Button>
       </ModalFooter>
     </Modal>

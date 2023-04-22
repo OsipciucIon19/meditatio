@@ -138,6 +138,10 @@ class UserService {
   async getAllUsers(): Promise<Array<User>> {
     return UserModel.find()
   }
+
+  async getOneUser(userId): Promise<User> {
+    return UserModel.findById(userId)
+  }
 }
 
 module.exports = new UserService()

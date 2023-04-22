@@ -111,6 +111,15 @@ class UserController {
       next(err)
     }
   }
+
+  async getUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = await userService.getOneUser(req.params.id)
+      return res.json(user)
+    } catch (err) {
+      next(err)
+    }
+  }
 }
 
 
